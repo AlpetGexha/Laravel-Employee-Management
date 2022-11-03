@@ -40,7 +40,10 @@ Route::get('/employees', function () {
             'countries.name as country',
             'states.name as state',
             'cities.name as city',
-            'departaments.name as departament'
+            'departaments.name as departament',
+            'employees.email',
+            'employees.phone',
+            'employees.personal_number',
         )
         ->get();
 });

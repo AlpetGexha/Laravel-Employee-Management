@@ -21,6 +21,9 @@ return new class extends Migration
             $table->unsignedBigInteger('state_id');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('email');
+            $table->string('phone');
+            $table->string('personal_number')->nullable();
             $table->string('address');
             $table->char('zip_code');
             $table->date('date_birth');

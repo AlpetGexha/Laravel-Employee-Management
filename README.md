@@ -2,7 +2,6 @@
 
 ![EM](https://user-images.githubusercontent.com/50520333/199846282-977d19d7-d600-4911-a43f-a3b59fc1de9e.PNG)
 
-
 # Installation
 
 #### Update composer
@@ -18,3 +17,6 @@ php artisan shield:install
 Email: admin@admin.com
 PW   : admin
 ```
+
+End Point employees API
+`URL/api/employees`

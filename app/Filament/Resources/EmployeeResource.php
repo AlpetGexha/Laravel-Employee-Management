@@ -24,6 +24,8 @@ use pxlrbt\FilamentExcel\Actions\ExportAction;
 use Webbingbrasil\FilamentAdvancedFilter\Filters\DateFilter;
 use Webbingbrasil\FilamentAdvancedFilter\Filters\NumberFilter;
 use Webbingbrasil\FilamentAdvancedFilter\Filters\TextFilter;
+use Ysfkaya\FilamentPhoneInput\PhoneInput;
+
 
 class EmployeeResource extends Resource
 {
@@ -78,6 +80,14 @@ class EmployeeResource extends Resource
                         Forms\Components\TextInput::make('last_name')
                             ->required()
                             ->maxLength(255),
+                        Forms\Components\TextInput::make('email')
+                            ->email()
+                            ->unique()
+                            ->required()
+                            ->maxLength(255),
+
+                        PhoneInput::make('phone'),
+
                         Forms\Components\TextInput::make('address')
                             ->required()
                             ->maxLength(255),
@@ -85,7 +95,6 @@ class EmployeeResource extends Resource
                             ->required()
                             ->maxLength(255),
                         Forms\Components\DatePicker::make('date_birth')
-
                             ->minDate(now()->subYears(85))
                             ->maxDate(now())
                             ->required(),
@@ -112,6 +121,8 @@ class EmployeeResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('first_name')->label('First Name')->searchable(),
                 Tables\Columns\TextColumn::make('last_name')->label('Last Name')->searchable(),
+                Tables\Columns\TextColumn::make('email')->label('Email')->searchable(),
+                Tables\Columns\TextColumn::make('phone')->label('Phone')->searchable(),
                 Tables\Columns\TextColumn::make('address')->label('Address'),
                 Tables\Columns\TextColumn::make('country.name')->label('Country'),
                 Tables\Columns\TextColumn::make('departament.name')->label('Departament'),
@@ -127,15 +138,19 @@ class EmployeeResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('country_id')
+                    ->label('Country')
                     ->placeholder('Select a Contry')
                     ->relationship('country', 'name'),
                 SelectFilter::make('departament_id')
+                    ->label('Departament')
                     ->placeholder('Select a Departament')
                     ->relationship('departament', 'name'),
                 SelectFilter::make('city_id')
+                    ->label('City')
                     ->placeholder('Select a City')
                     ->relationship('city', 'name'),
                 SelectFilter::make('state_id')
+                    ->label('State')
                     ->placeholder('Select a State')
                     ->relationship('state', 'name'),
                 SelectFilter::make('address')
