@@ -1,0 +1,56 @@
+created:
+    - database/factories/CountriesFactory.php
+    - database/factories/StatesFactory.php
+    - database/factories/CitiesFactory.php
+    - database/factories/DepartmentsFactory.php
+    - database/factories/RFIDFactory.php
+    - database/factories/AttendancesFactory.php
+    - database/factories/PTOFactory.php
+    - database/factories/SalaryStructuresFactory.php
+    - database/factories/DesignationsFactory.php
+    - database/factories/PayrollFactory.php
+    - database/factories/EmployeeFactory.php
+    - database/factories/ProjectFactory.php
+    - database/factories/TaskFactory.php
+    - database/migrations/2024_10_17_232826_create_countries_table.php
+    - database/migrations/2024_10_17_232827_create_states_table.php
+    - database/migrations/2024_10_17_232828_create_cities_table.php
+    - database/migrations/2024_10_17_232829_create_departments_table.php
+    - database/migrations/2024_10_17_232830_create_r_f_i_d_s_table.php
+    - database/migrations/2024_10_17_232831_create_attendances_table.php
+    - database/migrations/2024_10_17_232832_create_p_t_o_s_table.php
+    - database/migrations/2024_10_17_232833_create_salary_structures_table.php
+    - database/migrations/2024_10_17_232834_create_designations_table.php
+    - database/migrations/2024_10_17_232835_create_payrolls_table.php
+    - database/migrations/2024_10_17_232836_create_employees_table.php
+    - database/migrations/2024_10_17_232837_create_projects_table.php
+    - database/migrations/2024_10_17_232838_create_tasks_table.php
+    - database/migrations/2024_10_17_232839_create_employee_project_table.php
+    - database/migrations/2024_10_17_232840_create_employee_task_table.php
+    - app/Models/Countries.php
+    - app/Models/States.php
+    - app/Models/Cities.php
+    - app/Models/Departments.php
+    - app/Models/RFID.php
+    - app/Models/Attendances.php
+    - app/Models/PTO.php
+    - app/Models/SalaryStructures.php
+    - app/Models/Designations.php
+    - app/Models/Payroll.php
+    - app/Models/Employee.php
+    - app/Models/Project.php
+    - app/Models/Task.php
+models:
+    Countries: { country_code: string, name: string, relationships: { belongsTo: Company, hasMany: 'States, Employee' } }
+    States: { state_code: string, name: string, relationships: { belongsTo: 'Countries, Company', hasMany: 'Cities, Employee' } }
+    Cities: { name: string, city_code: 'string nullable', zip_code: 'string nullable', relationships: { belongsTo: 'States, Company', hasMany: Employee } }
+    Departments: { name: string, department_code: string, relationships: { belongsTo: Company, hasMany: Employee } }
+    RFID: { code: string, relationships: { belongsTo: 'User, Company' } }
+    Attendances: { checked_in_at: datetime, checked_out_at: 'datetime nullable', late: 'datetime nullable', overtime: 'datetime nullable', relationships: { belongsTo: 'User, Company' } }
+    PTO: { from_date: datetime, to_date: datetime, days: 'string nullable', leave_type: 'string nullable', reason: 'string nullable', is_approved: boolean, relationships: { belongsTo: 'Company, User' } }
+    SalaryStructures: { salary_class: string, basic_salary: 'decimal:8,2', mobile_allowance: string, medical_expenses: string, houseRent_allowance: string, total_salary: 'decimal:8,2', relationships: { belongsTo: Company, hasMany: 'Employee, Payroll' } }
+    Designations: { name: string, relationships: { belongsTo: Company, hasMany: Employee } }
+    Payroll: { deduction: 'decimal:8,2', total_payable: 'decimal:8,2', reason: 'string nullable', year: string, month: string, date: datetime, relationships: { belongsTo: 'User, SalaryStructures, Company' } }
+    Employee: { first_name: string, last_name: string, email: string, phone: string, personal_number: string, address: string, date_birth: datetime, date_hired: datetime, date_fired: 'datetime nullable', is_active: boolean, relationships: { belongsTo: 'Company, Countries, States, Cities, Departments, Designations, SalaryStructures', hasMany: Payroll } }
+    Project: { name: string, description: string, start_date: datetime, end_date: datetime, status: string, relationships: { belongsTo: Company, belongsToMany: Employee, hasMany: Task } }
+    Task: { name: string, description: string, start_date: datetime, end_date: datetime, duration: 'string nullable', status: string, relationships: { belongsTo: 'Project, Company', belongsToMany: Employee } }

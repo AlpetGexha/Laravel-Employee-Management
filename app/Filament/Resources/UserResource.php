@@ -3,90 +3,85 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\UserResource\Pages;
-use App\Filament\Resources\UserResource\RelationManagers;
 use App\Models\User;
 use Filament\Forms;
-use Filament\Forms\Components\Card;
-use Filament\Forms\Components\TextInput;
-use Filament\Pages\Page;
-use Filament\Resources\Form;
-use Filament\Resources\Pages\CreateRecord;
+use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Resources\Table;
 use Filament\Tables;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Columns\Column;
-use Illuminate\Support\Facades\Hash;
-use pxlrbt\FilamentExcel\Actions\ExportAction;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportAction as TablesExportAction;
-use Webbingbrasil\FilamentAdvancedFilter\Filters\TextFilter;
+use Filament\Tables\Table;
 
 class UserResource extends Resource
 {
     protected static ?string $model = User::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-users';
-
-    protected static ?string $navigationGroup = 'User Management';
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Card::make()
-                    ->schema([
-                        TextInput::make('name')
-                            ->required()
-                            ->maxLength(255),
-                        TextInput::make('email')
-                            ->label('Email Address')
-                            ->required()
-                            ->maxLength(255),
-                        TextInput::make('password')
-                            ->password()
-                            ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
-                            ->minLength(8)
-                            ->same('passwordConfirmation')
-                            ->dehydrated(fn ($state) => filled($state))
-                            ->dehydrateStateUsing(fn ($state) => Hash::make($state)),
-                        TextInput::make('passwordConfirmation')
-                            ->password()
-                            ->label('Password Confirmation')
-                            ->required(fn (Page $livewire): bool => $livewire instanceof CreateRecord)
-                            ->minLength(8)
-                            ->dehydrated(false)
-                    ])
+                Forms\Components\TextInput::make('name')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('email')
+                    ->email()
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\DateTimePicker::make('email_verified_at'),
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\Select::make('current_company_id')
+                    ->relationship('currentCompany', 'name')
+                    ->default(null),
+                Forms\Components\TextInput::make('current_connected_account_id')
+                    ->numeric()
+                    ->default(null),
+                Forms\Components\TextInput::make('profile_photo_path')
+                    ->maxLength(2048)
+                    ->default(null),
             ]);
     }
 
     public static function table(Table $table): Table
     {
-
-        Column::configureUsing(function (Column $column): void {
-            $column
-                ->toggleable()
-                ->sortable();
-        });
-
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')->searchable(),
-                Tables\Columns\TextColumn::make('email')->searchable(),
+                Tables\Columns\TextColumn::make('name')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('email_verified_at')
+                    ->dateTime()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('currentCompany.name')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('current_connected_account_id')
+                    ->numeric()
+                    ->sortable(),
+                Tables\Columns\TextColumn::make('profile_photo_path')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime(),
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                TextFilter::make('name'),
-                TextFilter::make('email'),
+                //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
-                // TablesExportAction::make('export'),
-                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\BulkActionGroup::make([
+                    Tables\Actions\DeleteBulkAction::make(),
+                ]),
             ]);
     }
 

@@ -1,0 +1,116 @@
+models:
+  Countries:
+    country_code: string
+    name: string
+    relationships:
+      belongsTo: Company
+      hasMany: States, Employee
+
+  States:
+    state_code: string
+    name: string
+    relationships:
+      belongsTo: Countries, Company
+      hasMany: Cities, Employee
+
+  Cities:
+    name: string
+    city_code: string nullable
+    zip_code: string nullable
+    relationships:
+      belongsTo: States, Company
+      hasMany: Employee
+
+  Departments:
+    name: string
+    department_code: string
+    relationships:
+      belongsTo: Company
+      hasMany: Employee
+
+  RFID:
+    code: string
+    relationships:
+      belongsTo: User, Company
+
+  Attendances:
+    checked_in_at: datetime
+    checked_out_at: datetime nullable
+    late: datetime nullable
+    overtime: datetime nullable
+    relationships:
+      belongsTo: User, Company
+
+  PTO:
+    from_date: datetime
+    to_date: datetime
+    days: string nullable
+    leave_type: string nullable
+    reason: string nullable
+    is_approved: boolean
+    relationships:
+      belongsTo: Company, User
+
+  SalaryStructures:
+    salary_class: string
+    basic_salary: decimal:8,2
+    mobile_allowance: string
+    medical_expenses: string
+    houseRent_allowance: string
+    total_salary: decimal:8,2
+    relationships:
+      belongsTo: Company
+      hasMany: Employee, Payroll
+
+  Designations:
+    name: string
+    relationships:
+      belongsTo: Company
+      hasMany: Employee
+
+  Payroll:
+    deduction: decimal:8,2
+    total_payable: decimal:8,2
+    reason: string nullable
+    year: string
+    month: string
+    date: datetime
+    relationships:
+      belongsTo: User, SalaryStructures, Company
+
+  Employee:
+    first_name: string
+    last_name: string
+    email: string
+    phone: string
+    personal_number: string
+    address: string
+    date_birth: datetime
+    date_hired: datetime
+    date_fired: datetime nullable
+    is_active: boolean
+    relationships:
+      belongsTo: Company, Countries, States, Cities, Departments, Designations, SalaryStructures
+      hasMany: Payroll
+
+  Project:
+    name: string
+    description: string
+    start_date: datetime
+    end_date: datetime
+    status: string
+    relationships:
+      belongsTo: Company
+      belongsToMany: Employee
+      hasMany: Task
+
+  Task:
+    name: string
+    description: string
+    start_date: datetime
+    end_date: datetime
+    duration: string nullable
+    status: string
+    relationships:
+      belongsTo: Project, Company
+      belongsToMany: Employee

@@ -2,34 +2,48 @@
 
 namespace Database\Factories;
 
+use App\Models\Cities;
+use App\Models\Company;
+use App\Models\Countries;
+use App\Models\Departments;
+use App\Models\Designations;
+use App\Models\Employee;
+use App\Models\SalaryStructures;
+use App\Models\States;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employee>
- */
 class EmployeeFactory extends Factory
 {
     /**
-     * Define the model's default state.
+     * The name of the factory's corresponding model.
      *
-     * @return array<string, mixed>
+     * @var string
      */
-    public function definition()
+    protected $model = Employee::class;
+
+    /**
+     * Define the model's default state.
+     */
+    public function definition(): array
     {
         return [
-            'country_id' => $this->faker->numberBetween(1, 9),
-            'departament_id' => $this->faker->numberBetween(1, 9),
-            'city_id' => $this->faker->numberBetween(1, 9),
-            'state_id' => $this->faker->numberBetween(1, 9),
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'email' => $this->faker->unique()->safeEmail,
-            'phone' => $this->faker->phoneNumber,
-            // 'personal_number' => $this->faker->randomNumber(11),
-            'address' => $this->faker->address,
-            'zip_code' => $this->faker->countryCode,
-            'date_birth' => $this->faker->dateTimeBetween('-30 years', '-20 years'),
-            'date_hired' => $this->faker->dateTimeBetween('-3 years', '-2 years'),
+            'first_name' => $this->faker->firstName(),
+            'last_name' => $this->faker->lastName(),
+            'email' => $this->faker->safeEmail(),
+            'phone' => $this->faker->phoneNumber(),
+            'personal_number' => $this->faker->word(),
+            'address' => $this->faker->word(),
+            'date_birth' => $this->faker->dateTime(),
+            'date_hired' => $this->faker->dateTime(),
+            'date_fired' => $this->faker->dateTime(),
+            'is_active' => $this->faker->boolean(),
+            'company_id' => Company::factory(),
+            'countries_id' => Countries::factory(),
+            'states_id' => States::factory(),
+            'cities_id' => Cities::factory(),
+            'departments_id' => Departments::factory(),
+            'designations_id' => Designations::factory(),
+            'salary_structures_id' => SalaryStructures::factory(),
         ];
     }
 }

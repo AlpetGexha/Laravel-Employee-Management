@@ -1,41 +1,31 @@
 {
     "name": "laravel/laravel",
     "type": "project",
-    "description": "The Laravel Framework.",
-    "keywords": ["framework", "laravel"],
+    "description": "The skeleton application for the Laravel framework.",
+    "keywords": ["laravel", "framework"],
     "license": "MIT",
     "require": {
-        "php": "^8.0.2",
-        "awcodes/filament-quick-create": "^1.1",
-        "awcodes/filament-table-repeater": "^1.0",
-        "bezhansalleh/filament-shield": "^2.3",
-        "filament/filament": "^2.16",
-        "flowframe/laravel-trend": "^0.1.1",
-        "guzzlehttp/guzzle": "^7.2",
-        "jeffgreco13/filament-breezy": "^1.4",
-        "laravel/framework": "^9.19",
-        "laravel/sanctum": "^3.0",
-        "laravel/tinker": "^2.7",
-        "marjose123/filament-lockscreen": "^1.1",
-        "marjose123/filament-no-connection": "^1.0",
-        "psr/simple-cache": "1.0",
-        "pxlrbt/filament-excel": "^1.1",
-        "pxlrbt/filament-spotlight": "^0.3.5",
-        "webbingbrasil/filament-advancedfilter": "^1.1",
-        "ysfkaya/filament-phone-input": "^1.1"
+        "php": "^8.2",
+        "andrewdwallo/filament-companies": "^4.0",
+        "filament/filament": "^3.2",
+        "laravel/framework": "^11.9",
+        "laravel/sanctum": "^4.0",
+        "laravel/tinker": "^2.9"
     },
     "require-dev": {
-        "barryvdh/laravel-debugbar": "^3.7",
-        "beyondcode/laravel-query-detector": "^1.6",
-        "doctrine/dbal": "^3.5",
-        "fakerphp/faker": "^1.9.1",
-        "glhd/laravel-dumper": "^1.0",
-        "laravel/pint": "^1.0",
-        "laravel/sail": "^1.0.1",
-        "mockery/mockery": "^1.4.4",
-        "nunomaduro/collision": "^6.1",
-        "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "barryvdh/laravel-debugbar": "^3.14",
+        "barryvdh/laravel-ide-helper": "^3.1",
+        "beyondcode/laravel-query-detector": "^2.0",
+        "fakerphp/faker": "^1.23",
+        "laravel-shift/blueprint": "^2.10",
+        "laravel/pail": "^1.1",
+        "laravel/pint": "^1.13",
+        "laravel/sail": "^1.26",
+        "mockery/mockery": "^1.6",
+        "nunomaduro/collision": "^8.1",
+        "pestphp/pest": "^3.4",
+        "pestphp/pest-plugin-laravel": "^3.0",
+        "tightenco/duster": "^3.0"
     },
     "autoload": {
         "psr-4": {
@@ -52,7 +42,8 @@
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
-            "@php artisan package:discover --ansi"
+            "@php artisan package:discover --ansi",
+            "@php artisan filament:upgrade"
         ],
         "post-update-cmd": [
             "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
@@ -61,7 +52,13 @@
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
         ],
         "post-create-project-cmd": [
-            "@php artisan key:generate --ansi"
+            "@php artisan key:generate --ansi",
+            "@php -r \"file_exists('database/database.sqlite') || touch('database/database.sqlite');\"",
+            "@php artisan migrate --graceful --ansi"
+        ],
+        "dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -c \"#93c5fd,#c4b5fd,#fb7185,#fdba74\" \"php artisan serve\" \"php artisan queue:listen --tries=1\" \"php artisan pail\" \"npm run dev\" --names=server,queue,logs,vite"
         ]
     },
     "extra": {
@@ -74,9 +71,10 @@
         "preferred-install": "dist",
         "sort-packages": true,
         "allow-plugins": {
-            "pestphp/pest-plugin": true
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
         }
     },
-    "minimum-stability": "dev",
+    "minimum-stability": "stable",
     "prefer-stable": true
 }

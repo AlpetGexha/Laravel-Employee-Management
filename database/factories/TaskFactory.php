@@ -1,0 +1,35 @@
+<?php
+
+namespace Database\Factories;
+
+use App\Models\Company;
+use App\Models\Project;
+use App\Models\Task;
+use Illuminate\Database\Eloquent\Factories\Factory;
+
+class TaskFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Task::class;
+
+    /**
+     * Define the model's default state.
+     */
+    public function definition(): array
+    {
+        return [
+            'name' => $this->faker->name(),
+            'description' => $this->faker->text(),
+            'start_date' => $this->faker->dateTime(),
+            'end_date' => $this->faker->dateTime(),
+            'duration' => $this->faker->word(),
+            'status' => $this->faker->word(),
+            'project_id' => Project::factory(),
+            'company_id' => Company::factory(),
+        ];
+    }
+}
