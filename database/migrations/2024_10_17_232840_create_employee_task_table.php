@@ -11,8 +11,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employee_task', function (Blueprint $table) {
-            $table->foreignId(Employee::class);
-            $table->foreignId(Task::class);
+            $table->foreignIdFor(Employee::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Task::class)->constrained()->cascadeOnDelete();
         });
     }
 
