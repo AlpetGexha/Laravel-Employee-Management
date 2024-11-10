@@ -8,6 +8,8 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 
 class EmployeeResource extends Resource
@@ -134,7 +136,14 @@ class EmployeeResource extends Resource
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Filter::make('is_active')->toggle(),
+                SelectFilter::make('departments')
+                    ->multiple()
+                    ->relationship('departments', 'name')
+                    ->preload()
+                    ->optionsLimit(20),
+                SelectFilter::make('status')
+
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
