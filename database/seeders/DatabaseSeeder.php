@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-        
+
         $admin->update([
             'current_company_id' => 1,
         ]);
@@ -58,6 +58,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Employee');
         $employees = $this->withProgressBar(100, function () {
             return Employee::factory()
+            ->has(Payroll::factory()->for(SalaryStructures::factory())->count(rand(1, 5)))
                 ->for(Countries::factory())
                 ->for(States::factory()
                     ->for(Countries::factory()))
@@ -67,7 +68,6 @@ class DatabaseSeeder extends Seeder
                             ->for(Countries::factory())))
                 ->for(Departments::factory())
                 ->for(SalaryStructures::factory())
-                ->has(Payroll::factory()->count(rand(1, 5)))
                 ->create();
         });
 
