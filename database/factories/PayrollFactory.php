@@ -30,7 +30,7 @@ class PayrollFactory extends Factory
             'month' => $this->faker->word(),
             'date' => $this->faker->dateTime(),
             //            'emopl' => User::factory(),
-            'salary_structuresb _id' => SalaryStructures::factory(),
+            'salary_structures_id' => SalaryStructures::factory(),
             'company_id' => Company::factory(),
         ];
     }
