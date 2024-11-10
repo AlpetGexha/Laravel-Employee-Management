@@ -2,12 +2,17 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\PTO as EnumsPTO;
+use App\Enums\Status;
 use App\Filament\Resources\PTOResource\Pages;
 use App\Models\PTO;
+use Filament\Actions\Action;
 use Filament\Forms;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action as ActionsAction;
 use Filament\Tables\Table;
 
 class PTOResource extends Resource
@@ -86,6 +91,16 @@ class PTOResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                ActionsAction::make('status')
+                    ->action(fn(array $data, PTO $record)  => $record->update(['is_approved' => $data['status']]))
+                    ->form([
+                        Select::make('status')
+                            ->options([
+                                'Approved' => EnumsPTO::Approved->value,
+                                'Rejected' => EnumsPTO::Rejected->value
+                            ])
+                    ])
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
