@@ -3,6 +3,7 @@
 namespace App\Filament\Pages;
 
 use App\Models\Attendances;
+use App\Models\Employee;
 use App\Models\RFID;
 use App\Models\User;
 use Carbon\Carbon;
@@ -17,12 +18,15 @@ class Checkin extends Page
 {
     use InteractsWithFormActions;
 
+    protected static ?string $navigationGroup = 'Check In/Out';
+    
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament.pages.checkin';
+
     public string $rfidUID = '';
 
-    public ?User $employee = null;
+    public ?Employee $employee = null;
 
     public ?Attendances $attendance = null;
 
@@ -65,7 +69,8 @@ class Checkin extends Page
             return;
         }
 
-        $this->employee = $rfidCard->user;
+        $this->employee = $rfidCard->employee;
+
 
         $this->attendance = Attendances::query()
             ->where('employee_id', $this->employee->id)

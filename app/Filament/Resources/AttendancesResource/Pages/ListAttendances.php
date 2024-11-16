@@ -5,6 +5,7 @@ namespace App\Filament\Resources\AttendancesResource\Pages;
 use App\Filament\Resources\AttendancesResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
+use Filament\Tables\Actions\Action;
 
 class ListAttendances extends ListRecords
 {
@@ -13,7 +14,7 @@ class ListAttendances extends ListRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+//            Actions\Action::make('Checkin')->url(route('filament.admin.pages.checkin')),
         ];
     }
 }
