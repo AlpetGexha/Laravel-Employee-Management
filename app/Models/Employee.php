@@ -113,4 +113,15 @@ class Employee extends Model
     {
         return $this->belongsToMany(Project::class);
     }
+
+    public function attendances(): HasMany
+    {
+        return $this->hasMany(Attendances::class);
+    }
+
+    public function attendancesThisYear(): HasMany
+    {
+        return $this->hasMany(Attendances::class)
+            ->whereYear('created_at', now()->year);
+    }
 }

@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->timestamp('checked_out_at')->nullable();
             $table->string('late')->nullable();
             $table->string('overtime')->nullable();
+            $table->string('total_minutes')->nullable();
             $table->timestamps();
         });
     }

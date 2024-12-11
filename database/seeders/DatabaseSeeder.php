@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Attendances;
 use App\Models\Cities;
 use App\Models\Countries;
 use App\Models\Departments;
@@ -28,6 +29,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->withPersonalCompany()->create();
+
+//        Attendances::factory()->count(500)->create();
 
         $admin = User::factory()->withPersonalCompany()->create([
             'name' => 'Test User',

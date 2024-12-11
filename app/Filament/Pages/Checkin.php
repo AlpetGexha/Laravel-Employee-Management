@@ -5,13 +5,11 @@ namespace App\Filament\Pages;
 use App\Models\Attendances;
 use App\Models\Employee;
 use App\Models\RFID;
-use App\Models\User;
 use Carbon\Carbon;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Pages\Concerns\InteractsWithFormActions;
 use Filament\Pages\Page;
-use Filament\Pages\SimplePage;
 use Illuminate\Support\Facades\Session;
 
 class Checkin extends Page
@@ -19,7 +17,7 @@ class Checkin extends Page
     use InteractsWithFormActions;
 
     protected static ?string $navigationGroup = 'Check In/Out';
-    
+
     protected static ?string $navigationIcon = 'heroicon-o-document-text';
 
     protected static string $view = 'filament.pages.checkin';
@@ -48,7 +46,10 @@ class Checkin extends Page
     public function confirmCheckout(): void
     {
         if ($this->attendance) {
-            $this->attendance->update(['checked_out_at' => Carbon::now()]);
+            $this->attendance->update([
+                'checked_out_at' => Carbon::now(),
+                'total_minutes' => Carbon::now()->diffInMinutes($this->attendance->checked_in_at),
+            ]);
 
             Session::flash('success', "{$this->employee->name} checked out successfully after {$this->hoursWorked} hours and {$this->minutesWorked} minutes.");
 

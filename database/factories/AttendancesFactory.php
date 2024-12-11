@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Attendances;
 use App\Models\Company;
+use App\Models\Employee;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
@@ -21,13 +22,23 @@ class AttendancesFactory extends Factory
      */
     public function definition(): array
     {
+        $company = Company::pluck('id')->first();
         return [
-            'checked_in_at' => $this->faker->dateTime(),
-            'checked_out_at' => $this->faker->dateTime(),
+            'checked_in_at' => $this->faker->dateTimeBetween('-3 months'),
             'late' => $this->faker->dateTime(),
             'overtime' => $this->faker->dateTime(),
-            'user_id' => User::factory(),
-            'company_id' => Company::factory(),
+            'company_id' => $company,
         ];
+    }
+
+    public function configure(): static
+    {
+        $employee = Employee::pluck('id');
+        return $this->afterMaking(function (Attendances $attendances) use ($employee) {
+            $attendances->employee_id = $employee->random();
+            $attendances->checked_out_at = $attendances->checked_in_at->addHours(rand(6, 12));
+            $attendances->total_minutes = $attendances->checked_in_at->diffInMinutes($attendances->checked_out_at);
+        });
+
     }
 }

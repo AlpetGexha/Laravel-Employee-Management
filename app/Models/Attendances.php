@@ -23,6 +23,7 @@ class Attendances extends Model
         'overtime',
         'employee_id',
         'company_id',
+        'total_minutes',
     ];
 
     /**
@@ -48,5 +49,10 @@ class Attendances extends Model
     public function company(): BelongsTo
     {
         return $this->belongsTo(Company::class);
+    }
+
+    public function employee(): BelongsTo
+    {
+        return $this->belongsTo(Employee::class);
     }
 }
