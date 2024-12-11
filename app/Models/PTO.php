@@ -6,6 +6,7 @@ use App\Traits\EnsureCompany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class PTO extends Model
 {
@@ -48,8 +49,8 @@ class PTO extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function employee(): BelongsTo
+    public function employee(): HasMany
     {
-        return $this->belongsTo(Employee::class);
+        return $this->hasMany(Employee::class);
     }
 }

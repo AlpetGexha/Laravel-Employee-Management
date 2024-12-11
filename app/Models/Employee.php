@@ -109,6 +109,12 @@ class Employee extends Model
         return $this->hasMany(PTO::class);
     }
 
+    public function ptoThisYear(): HasMany
+    {
+        return $this->hasMany(PTO::class)
+            ->whereYear('from_date', now()->year);
+    }
+
     public function projects(): BelongsToMany
     {
         return $this->belongsToMany(Project::class);
