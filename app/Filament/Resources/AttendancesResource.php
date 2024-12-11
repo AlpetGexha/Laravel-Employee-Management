@@ -60,6 +60,8 @@ class AttendancesResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('overtime')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('total_minutes')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
