@@ -35,9 +35,9 @@ class AdminPanelProvider extends PanelProvider
                 'primary' => Color::Indigo,
                 'gray' => Color::Slate,
             ])
-            ->tenant(Company::class)
-            ->tenantProfile(CompanySettings::class)
-            ->tenantRegistration(CreateCompany::class)
+//            ->tenant(Company::class)
+//            ->tenantProfile(CompanySettings::class)
+//            ->tenantRegistration(CreateCompany::class)
             ->sidebarCollapsibleOnDesktop()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
