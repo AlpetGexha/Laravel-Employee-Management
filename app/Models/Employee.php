@@ -130,4 +130,9 @@ class Employee extends Model
         return $this->hasMany(Attendances::class)
             ->whereYear('created_at', now()->year);
     }
+
+    public function tasks(): BelongsToMany
+    {
+        return $this->belongsToMany(Task::class);
+    }
 }

@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->withPersonalCompany()->create();
 
-//        Attendances::factory()->count(500)->create();
 
         $admin = User::factory()->withPersonalCompany()->create([
             'name' => 'Test User',
@@ -41,7 +40,7 @@ class DatabaseSeeder extends Seeder
             'current_company_id' => 1,
         ]);
 
-        $this->command->info('Seedin Contries');
+        $this->command->info('Seeding Contries');
 
         $ez = $this->withProgressBar(20, function () {
             return Countries::factory()->create();
@@ -61,14 +60,21 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Employee');
         $employees = $this->withProgressBar(100, function () {
             return Employee::factory()
-            ->has(Payroll::factory()->for(SalaryStructures::factory())->count(rand(1, 5)))
+                ->hasProjects()
+                ->hasTasks(rand(1, 10))
+                ->has(Payroll::factory()->for(SalaryStructures::factory())->count(rand(1, 5)))
                 ->for(Countries::factory())
-                ->for(States::factory()
-                    ->for(Countries::factory()))
+                ->for(
+                    States::factory()
+                        ->for(Countries::factory())
+                )
                 ->for(Cities::factory()
                     ->for(
                         States::factory()
-                            ->for(Countries::factory())))
+                            ->for(Countries::factory()
+                            )
+                    )
+                )
                 ->for(Departments::factory())
                 ->for(SalaryStructures::factory())
                 ->create();
@@ -90,12 +96,7 @@ class DatabaseSeeder extends Seeder
                 ->create();
         });
 
-        //        $employee = $this->withProgressBar(10, function () {
-        //            return Employee::factory()
-        //                ->for()
-        //                ->count(10)
-        //                ->create();
-        //        });
+        Attendances::factory()->count(500)->create();
 
     }
 

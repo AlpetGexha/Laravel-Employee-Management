@@ -10,6 +10,7 @@ return new class extends Migration
 {
     public function up(): void
     {
+
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
