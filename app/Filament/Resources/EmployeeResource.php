@@ -79,11 +79,26 @@ class EmployeeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function ($query) {
+                $query
+//                    ->join('states', 'states.id', '=', 'employees.states_id')
+//                    ->join('cities', 'cities.id', '=', 'employees.cities_id')
+//                    ->join('departments', 'departments.id', '=', 'employees.departments_id')
+//                    ->join('designations', 'designations.id', '=', 'employees.designations_id')
+//                    ->select(['employees.first_name', 'employees.last_name', 'employees.email', 'employees.phone', 'employees.personal_number', 'employees.address', 'employees.date_birth', 'employees.date_hired', 'states.name as state', 'cities.name as city', 'departments.name as department', 'designations.name as designation'])
+                    ->withCount(['projects', 'ptoThisYear', 'payrolls'])
+                    ->withSum('attendancesThisYear', 'total_minutes');
+//                dd($query->toSql());
+            })
             ->columns([
+                Tables\Columns\TextColumn::make('payrolls_count'),
+                Tables\Columns\TextColumn::make('projects_count'),
+                Tables\Columns\TextColumn::make('pto_this_year_count'),
+                Tables\Columns\TextColumn::make('attendances_sum_total_minutes'),
                 Tables\Columns\TextColumn::make('company.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('countries.name')
+                Tables\Columns\TextColumn::make('statessss')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('states.name')
