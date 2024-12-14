@@ -3,10 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Enums\PTO as EnumsPTO;
-use App\Enums\Status;
 use App\Filament\Resources\PTOResource\Pages;
 use App\Models\PTO;
-use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
@@ -92,14 +90,14 @@ class PTOResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 ActionsAction::make('status')
-                    ->action(fn(array $data, PTO $record)  => $record->update(['is_approved' => $data['status']]))
+                    ->action(fn (array $data, PTO $record) => $record->update(['is_approved' => $data['status']]))
                     ->form([
                         Select::make('status')
                             ->options([
                                 'Approved' => EnumsPTO::Approved->value,
-                                'Rejected' => EnumsPTO::Rejected->value
-                            ])
-                    ])
+                                'Rejected' => EnumsPTO::Rejected->value,
+                            ]),
+                    ]),
 
             ])
             ->bulkActions([

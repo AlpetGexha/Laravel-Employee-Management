@@ -10,8 +10,8 @@ trait EnsureCompany
     {
         //         if (auth()->check()) {
 
-//        this is only when we are using the compaby tenlet
-//        static::addGlobalScope(new \App\Models\Scopes\EnsureCompany);
+        //        this is only when we are using the compaby tenlet
+        //        static::addGlobalScope(new \App\Models\Scopes\EnsureCompany);
 
         static::creating(function ($model) {
             $model->company_id = 1;

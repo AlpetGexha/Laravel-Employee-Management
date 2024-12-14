@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->withPersonalCompany()->create();
 
-
         $admin = User::factory()->withPersonalCompany()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',

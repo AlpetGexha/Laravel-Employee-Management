@@ -43,7 +43,7 @@ class ProjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn($query) => $query->withCount('employees'))
+            ->modifyQueryUsing(fn ($query) => $query->withCount('employees'))
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),

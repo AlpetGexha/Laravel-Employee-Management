@@ -88,7 +88,7 @@ class EmployeeResource extends Resource
 //                    ->select(['employees.first_name', 'employees.last_name', 'employees.email', 'employees.phone', 'employees.personal_number', 'employees.address', 'employees.date_birth', 'employees.date_hired', 'states.name as state', 'cities.name as city', 'departments.name as department', 'designations.name as designation'])
                     ->withCount(['projects', 'ptoThisYear', 'payrolls'])
                     ->withSum('attendancesThisYear', 'total_minutes');
-//                dd($query->toSql());
+                //                dd($query->toSql());
             })
             ->columns([
                 Tables\Columns\TextColumn::make('payrolls_count'),
@@ -157,7 +157,7 @@ class EmployeeResource extends Resource
                     ->relationship('departments', 'name')
                     ->preload()
                     ->optionsLimit(20),
-                SelectFilter::make('status')
+                SelectFilter::make('status'),
 
             ])
             ->actions([

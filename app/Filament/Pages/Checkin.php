@@ -63,7 +63,7 @@ class Checkin extends Page
             ->where('code', $this->rfidUID)
             ->first();
 
-        if (!$rfidCard) {
+        if (! $rfidCard) {
             Session::flash('success', 'This RFID card is not assigned to an employee.');
             $this->reset('rfidUID');
 
@@ -71,7 +71,6 @@ class Checkin extends Page
         }
 
         $this->employee = $rfidCard->employee;
-
 
         $this->attendance = Attendances::query()
             ->where('employee_id', $this->employee->id)
@@ -104,5 +103,4 @@ class Checkin extends Page
                     ->autofocus(),
             ]);
     }
-
 }
