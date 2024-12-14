@@ -14,9 +14,11 @@ class RFIDResource extends Resource
 {
     protected static ?string $model = RFID::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-identification';
 
     protected static ?string $navigationGroup = 'Check In/Out';
+
+    protected static ?string $label = 'RFID';
 
     public static function form(Form $form): Form
     {
