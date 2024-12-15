@@ -55,10 +55,10 @@ class PayrollResource extends Resource
                 Tables\Columns\TextColumn::make('company.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('salaryStructures.id')
+                Tables\Columns\TextColumn::make('salaryStructures.salary_class')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('employee.id')
+                Tables\Columns\TextColumn::make('employee.first_name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('deduction')
