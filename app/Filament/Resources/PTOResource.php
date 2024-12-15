@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\LeaveType;
 use App\Enums\PTO as EnumsPTO;
 use App\Filament\Resources\PTOResource\Pages;
 use App\Models\PTO;
@@ -21,35 +22,7 @@ class PTOResource extends Resource
 
     protected static ?string $navigationGroup = 'Employee Management';
 
-    public static function form(Form $form): Form
-    {
-        return $form
-            ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
-                    ->required(),
-                Forms\Components\Select::make('employee_id')
-                    ->relationship('employee', 'id')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('from_date')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('to_date')
-                    ->required(),
-                Forms\Components\TextInput::make('days')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('leave_type')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('reason')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('is_approved')
-                    ->required()
-                    ->maxLength(255)
-                    ->default('Pending'),
-            ]);
-    }
+    protected static ?string $label = 'PTO';
 
     public static function table(Table $table): Table
     {
@@ -90,7 +63,7 @@ class PTOResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 ActionsAction::make('status')
-                    ->action(fn (array $data, PTO $record) => $record->update(['is_approved' => $data['status']]))
+                    ->action(fn(array $data, PTO $record) => $record->update(['is_approved' => $data['status']]))
                     ->form([
                         Select::make('status')
                             ->options([
@@ -104,6 +77,27 @@ class PTOResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+            ]);
+    }
+
+    public static function form(Form $form): Form
+    {
+        return $form
+            ->schema([
+                Forms\Components\Select::make('employee_id')
+                    ->relationship('employee', 'id')
+                    ->columnSpanFull()
+                    ->required(),
+                Forms\Components\DateTimePicker::make('from_date')
+                    ->required(),
+                Forms\Components\DateTimePicker::make('to_date')
+                    ->required(),
+                Forms\Components\Select::make('leave_type')
+                    ->options(LeaveType::class)
+                    ->required(),
+                Forms\Components\Textarea::make('reason')
+                    ->required()
+                    ->columnSpanFull(),
             ]);
     }
 
