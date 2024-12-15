@@ -46,9 +46,6 @@ class CitiesResource extends Resource
                 Tables\Columns\TextColumn::make('company.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('countries_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('states.name')
                     ->numeric()
                     ->sortable(),
