@@ -14,7 +14,7 @@ return new class extends Migration
             $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
             $table->string('name');
             $table->string('description');
-            $table->dateTime('start_date');
+            $table->dateTime('start_date')->nullable();
             $table->dateTime('end_date');
             $table->string('type')->default('not_specified');
             $table->string('status')->default('pending');

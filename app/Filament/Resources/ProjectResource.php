@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\Status;
 use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers\EmployeesRelationManager;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Models\Project;
+use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -26,24 +28,23 @@ class ProjectResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->columnSpanFull()
                     ->maxLength(255),
-                Forms\Components\Textarea::make('description')
+                Forms\Components\MarkdownEditor::make('description')
                     ->required()
+                    ->columnSpanFull()
                     ->maxLength(255),
                 Forms\Components\DateTimePicker::make('start_date')
                     ->required(),
                 Forms\Components\DateTimePicker::make('end_date')
                     ->required(),
-                Forms\Components\TextInput::make('status')
-                    ->required()
-                    ->maxLength(255),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn ($query) => $query->withCount('employees'))
+            ->modifyQueryUsing(fn($query) => $query->withCount('employees', 'tasks'))
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
@@ -55,8 +56,21 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('end_date')
                     ->dateTime()
                     ->sortable(),
+                Tables\Columns\TextColumn::make('time_left')
+                    ->formatStateUsing(fn($record) => $record->time_left < 0 ? 'Overdue' : $record->time_left . ' days')
+                    ->badge()
+                    ->color(function ($record) {
+                        if ($record->time_left < 0) {
+                            return 'gray';
+                        } elseif ($record->time_left < 5) {
+                            return 'warning';
+                        } else {
+                            return 'primary';
+                        }
+                    })
+                    ->label('Time Left'),
                 Tables\Columns\TextColumn::make('status')
-                    ->searchable(),
+                    ->badge(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -68,12 +82,31 @@ class ProjectResource extends Resource
                 Tables\Columns\TextColumn::make('employees_count')
                     ->label('Employees')
                     ->sortable(),
+                Tables\Columns\TextColumn::make('tasks_count')
+                    ->label('Tasks')
+                    ->sortable(),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\Action::make('status')
+                    ->label('Status')
+                    ->fillForm(function ($record) {
+                        return [
+                            'status' => $record->status,
+                        ];
+                    })
+                    ->form([
+                        Forms\Components\Select::make('status')
+                            ->options(Status::class)
+                    ])
+                    ->action(function (array $data, $record) {
+                        $record->status = $data['status'];
+                        $record->save();
+                    }),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
