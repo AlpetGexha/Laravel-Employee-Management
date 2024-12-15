@@ -22,11 +22,9 @@ class DesignationsResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
-                    ->required(),
                 Forms\Components\TextInput::make('name')
                     ->required()
+                    ->columnSpanFull()
                     ->maxLength(255),
             ]);
     }
@@ -73,7 +71,7 @@ class DesignationsResource extends Resource
     {
         return [
             'index' => Pages\ListDesignations::route('/'),
-            'create' => Pages\CreateDesignations::route('/create'),
+//            'create' => Pages\CreateDesignations::route('/create'),
             'edit' => Pages\EditDesignations::route('/{record}/edit'),
         ];
     }
