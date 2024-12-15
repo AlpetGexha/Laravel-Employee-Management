@@ -22,9 +22,6 @@ class SalaryStructuresResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
-                    ->required(),
                 Forms\Components\TextInput::make('salary_class')
                     ->required()
                     ->maxLength(255),
