@@ -22,14 +22,11 @@ class PayrollResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
+                Forms\Components\Select::make('employee_id')
+                    ->relationship('employee', 'id')
                     ->required(),
                 Forms\Components\Select::make('salary_structures_id')
                     ->relationship('salaryStructures', 'id')
-                    ->required(),
-                Forms\Components\Select::make('employee_id')
-                    ->relationship('employee', 'id')
                     ->required(),
                 Forms\Components\TextInput::make('deduction')
                     ->required()
