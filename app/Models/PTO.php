@@ -49,8 +49,8 @@ class PTO extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function employee(): HasMany
+    public function employee(): BelongsTo
     {
-        return $this->hasMany(Employee::class);
+        return $this->belongsTo(Employee::class);
     }
 }

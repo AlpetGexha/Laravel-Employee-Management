@@ -40,7 +40,10 @@ class TasksRelationManager extends RelationManager
                     })
                     ->form([
                         Forms\Components\Select::make('employees')
-                            ->relationship('employees', 'first_name')
+                            ->options(function (RelationManager $livewire) {
+                                return $livewire->getOwnerRecord()->employees->pluck('first_name', 'id');
+                            })
+
                     ])
                     ->action(function (array $data, $record) {
                         $record->employee_id = $data['employees'];

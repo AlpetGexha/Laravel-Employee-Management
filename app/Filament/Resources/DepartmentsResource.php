@@ -41,14 +41,21 @@ class DepartmentsResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function ($query) {
+                $query
+                    ->where('company_id', 1)
+                    ->withCount('employees');
+            })
             ->columns([
-                Tables\Columns\TextColumn::make('company.name')
-                    ->numeric()
-                    ->sortable(),
+//                Tables\Columns\TextColumn::make('company.name')
+//                    ->numeric()
+//                    ->sortable(),
                 Tables\Columns\TextColumn::make('department_code')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
+                Tables\Columns\TextColumn::make('employees_count')
+                    ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

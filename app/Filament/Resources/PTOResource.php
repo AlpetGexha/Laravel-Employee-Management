@@ -31,7 +31,7 @@ class PTOResource extends Resource
                 Tables\Columns\TextColumn::make('company.name')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('employee.id')
+                Tables\Columns\TextColumn::make('employee.first_name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('from_date')
@@ -85,7 +85,7 @@ class PTOResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('employee_id')
-                    ->relationship('employee', 'id')
+                    ->relationship('employees', 'id')
                     ->columnSpanFull()
                     ->required(),
                 Forms\Components\DateTimePicker::make('from_date')
