@@ -22,10 +22,9 @@ class CitiesFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'city_code' => $this->faker->word(),
-            'zip_code' => $this->faker->word(),
-            //            'states_id' => States::factory(),
+            'name' => $this->faker->city(),
+            'city_code' => $this->faker->citySuffix(),
+            'zip_code' => $this->faker->numberBetween(10000, 99999),
             'company_id' => Company::factory(),
         ];
     }
