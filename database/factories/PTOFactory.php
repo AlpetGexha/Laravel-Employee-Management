@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Company;
+use App\Models\Employee;
 use App\Models\PTO;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
@@ -24,12 +25,11 @@ class PTOFactory extends Factory
         return [
             'from_date' => $this->faker->dateTime(),
             'to_date' => $this->faker->dateTime(),
-            'days' => $this->faker->word(),
-            'leave_type' => $this->faker->word(),
-            'reason' => $this->faker->word(),
+//            'days' => $this->faker->word(),
+            'leave_type' => $this->faker->randomElement(\App\Enums\LeaveType::toArray()),
+            'reason' => $this->faker->sentence(),
             'is_approved' => $this->faker->boolean(),
             'company_id' => Company::factory(),
-            'user_id' => User::factory(),
-        ];
+          ];
     }
 }
