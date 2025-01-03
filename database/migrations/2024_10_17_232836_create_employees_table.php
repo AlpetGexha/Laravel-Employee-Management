@@ -18,8 +18,8 @@ return new class extends Migration
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(Countries::class)->constrained()->cascadeOnDelete();
-            $table->foreignIdFor(States::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Countries::class)->nullable()->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(States::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Cities::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Departments::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Designations::class)->nullable()->constrained()->cascadeOnDelete();
