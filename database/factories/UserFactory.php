@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Wallo\FilamentCompanies\FilamentCompanies;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
+ */
 class UserFactory extends Factory
 {
     /**
@@ -46,7 +49,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn (array $attributes): array => [
             'email_verified_at' => null,
         ]);
     }
@@ -62,7 +65,7 @@ class UserFactory extends Factory
 
         return $this->has(
             Company::factory()
-                ->state(fn (array $attributes, User $user) => [
+                ->state(fn (array $attributes, User $user): array => [
                     'name' => $user->name . '\'s Company',
                     'user_id' => $user->id,
                     'personal_company' => true,

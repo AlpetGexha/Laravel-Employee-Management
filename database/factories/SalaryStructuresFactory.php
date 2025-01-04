@@ -6,6 +6,9 @@ use App\Models\Company;
 use App\Models\SalaryStructures;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\SalaryStructures>
+ */
 class SalaryStructuresFactory extends Factory
 {
     /**
@@ -21,12 +24,12 @@ class SalaryStructuresFactory extends Factory
     public function definition(): array
     {
         return [
-            'salary_class' => $this->faker->word(),
-            'basic_salary' => $this->faker->randomFloat(2, 0, 999999.99),
-            'mobile_allowance' => $this->faker->word(),
-            'medical_expenses' => $this->faker->word(),
-            'houseRent_allowance' => $this->faker->word(),
-            'total_salary' => $this->faker->randomFloat(2, 0, 999999.99),
+            'salary_class' => fake()->word(),
+            'basic_salary' => fake()->randomFloat(2, 0, 999999.99),
+            'mobile_allowance' => fake()->word(),
+            'medical_expenses' => fake()->word(),
+            'houseRent_allowance' => fake()->word(),
+            'total_salary' => fake()->randomFloat(2, 0, 999999.99),
             'company_id' => Company::factory(),
         ];
     }

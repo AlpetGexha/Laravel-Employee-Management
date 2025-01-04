@@ -13,7 +13,7 @@ trait EnsureCompany
         //        this is only when we are using the compaby tenlet
         //        static::addGlobalScope(new \App\Models\Scopes\EnsureCompany);
 
-        static::creating(function ($model) {
+        static::creating(function ($model): void {
             $model->company_id = 1;
         });
         // }

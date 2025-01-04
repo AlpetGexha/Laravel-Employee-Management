@@ -79,7 +79,7 @@ class EmployeeResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(function ($query) {
+            ->modifyQueryUsing(function ($query): void {
                 $query
 //                    ->join('states', 'states.id', '=', 'employees.states_id')
 //                    ->join('cities', 'cities.id', '=', 'employees.cities_id')

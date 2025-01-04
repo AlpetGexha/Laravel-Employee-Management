@@ -45,7 +45,7 @@ class Checkin extends Page
 
     public function confirmCheckout(): void
     {
-        if ($this->attendance) {
+        if ($this->attendance instanceof \App\Models\Attendances) {
             $this->attendance->update([
                 'checked_out_at' => Carbon::now(),
                 'total_minutes' => Carbon::now()->diffInMinutes($this->attendance->checked_in_at),

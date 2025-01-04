@@ -6,6 +6,9 @@ use App\Models\Company;
 use App\Models\Designations;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Designations>
+ */
 class DesignationsFactory extends Factory
 {
     /**
@@ -21,7 +24,7 @@ class DesignationsFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'name' => fake()->name(),
             'company_id' => Company::factory(),
         ];
     }

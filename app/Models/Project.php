@@ -44,10 +44,9 @@ class Project extends Model
         return $this->belongsTo(Company::class);
     }
 
-    // add custom attribute time_left that calculates the time left for the project to end
-    public function getTimeLeftAttribute(): int
+    protected function timeLeft(): \Illuminate\Database\Eloquent\Casts\Attribute
     {
-        return now()->diffInDays($this->end_date);
+        return \Illuminate\Database\Eloquent\Casts\Attribute::make(get: fn() => now()->diffInDays($this->end_date));
     }
 
     public function employees(): BelongsToMany

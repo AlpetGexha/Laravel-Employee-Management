@@ -24,10 +24,10 @@ class GenerateFilamentFormFromModels extends Command
     /**
      * Execute the console command.
      */
-    public function handle()
+    public function handle(): void
     {
         $models = array_map('basename', glob(app_path('Models/*.php')));
-        $models = array_map(fn ($model) => str_replace('.php', '', $model), $models);
+        $models = array_map(fn ($model): string => str_replace('.php', '', $model), $models);
 
         foreach ($models as $model) {
             // call a command to generate a form for each model

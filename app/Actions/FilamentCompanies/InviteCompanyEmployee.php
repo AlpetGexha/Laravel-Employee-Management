@@ -65,7 +65,7 @@ class InviteCompanyEmployee implements InvitesCompanyEmployees
         return array_filter([
             'email' => [
                 'required', 'email',
-                Rule::unique('company_invitations')->where(static function (Builder $query) use ($company) {
+                Rule::unique('company_invitations')->where(static function (Builder $query) use ($company): void {
                     $query->where('company_id', $company->id);
                 }),
             ],
@@ -80,7 +80,7 @@ class InviteCompanyEmployee implements InvitesCompanyEmployees
      */
     protected function ensureUserIsNotAlreadyOnCompany(Company $company, string $email): Closure
     {
-        return static function ($validator) use ($company, $email) {
+        return static function ($validator) use ($company, $email): void {
             $validator->errors()->addIf(
                 $company->hasUserWithEmail($email),
                 'email',

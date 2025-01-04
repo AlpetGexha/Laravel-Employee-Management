@@ -8,6 +8,9 @@ use App\Models\SalaryStructures;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Payroll>
+ */
 class PayrollFactory extends Factory
 {
     /**
@@ -23,12 +26,12 @@ class PayrollFactory extends Factory
     public function definition(): array
     {
         return [
-            'deduction' => $this->faker->randomFloat(2, 0, 999999.99),
-            'total_payable' => $this->faker->randomFloat(2, 0, 999999.99),
-            'reason' => $this->faker->word(),
-            'year' => $this->faker->year(),
-            'month' => $this->faker->month(),
-            'date' => $this->faker->dateTime(),
+            'deduction' => fake()->randomFloat(2, 0, 999999.99),
+            'total_payable' => fake()->randomFloat(2, 0, 999999.99),
+            'reason' => fake()->word(),
+            'year' => fake()->year(),
+            'month' => fake()->month(),
+            'date' => fake()->dateTime(),
             //            'emopl' => User::factory(),
             'salary_structures_id' => SalaryStructures::factory(),
             'company_id' => Company::factory(),

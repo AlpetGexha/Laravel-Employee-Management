@@ -7,6 +7,9 @@ use App\Models\Company;
 use App\Models\States;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Cities>
+ */
 class CitiesFactory extends Factory
 {
     /**
@@ -22,9 +25,9 @@ class CitiesFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->city(),
-            'city_code' => $this->faker->citySuffix(),
-            'zip_code' => $this->faker->numberBetween(10000, 99999),
+            'name' => fake()->city(),
+            'city_code' => fake()->citySuffix(),
+            'zip_code' => fake()->numberBetween(10000, 99999),
             'company_id' => Company::factory(),
         ];
     }

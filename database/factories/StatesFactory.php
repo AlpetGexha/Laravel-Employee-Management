@@ -7,6 +7,9 @@ use App\Models\Countries;
 use App\Models\States;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\States>
+ */
 class StatesFactory extends Factory
 {
     /**
@@ -22,8 +25,8 @@ class StatesFactory extends Factory
     public function definition(): array
     {
         return [
-            'state_code' => $this->faker->word(),
-            'name' => $this->faker->name(),
+            'state_code' => fake()->word(),
+            'name' => fake()->name(),
             //            'countries_id' => Countries::factory(),
             'company_id' => Company::factory(),
         ];

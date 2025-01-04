@@ -12,6 +12,9 @@ use App\Models\SalaryStructures;
 use App\Models\States;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Employee>
+ */
 class EmployeeFactory extends Factory
 {
     /**
@@ -27,16 +30,16 @@ class EmployeeFactory extends Factory
     public function definition(): array
     {
         return [
-            'first_name' => $this->faker->firstName(),
-            'last_name' => $this->faker->lastName(),
-            'email' => $this->faker->safeEmail(),
-            'phone' => $this->faker->phoneNumber(),
-            'personal_number' => $this->faker->word(),
-            'address' => $this->faker->word(),
-            'date_birth' => $this->faker->dateTime(),
-            'date_hired' => $this->faker->dateTime(),
-            'date_fired' => $this->faker->dateTime(),
-            'is_active' => $this->faker->boolean(),
+            'first_name' => fake()->firstName(),
+            'last_name' => fake()->lastName(),
+            'email' => fake()->safeEmail(),
+            'phone' => fake()->phoneNumber(),
+            'personal_number' => fake()->word(),
+            'address' => fake()->word(),
+            'date_birth' => fake()->dateTime(),
+            'date_hired' => fake()->dateTime(),
+            'date_fired' => fake()->dateTime(),
+            'is_active' => fake()->boolean(),
             'company_id' => Company::factory(),
             'countries_id' => Countries::factory(),
             'states_id' => States::factory(),

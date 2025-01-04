@@ -41,7 +41,7 @@ class DepartmentsResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(function ($query) {
+            ->modifyQueryUsing(function ($query): void {
                 $query
                     ->where('company_id', 1)
                     ->withCount('employees');

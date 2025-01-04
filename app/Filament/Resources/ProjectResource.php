@@ -57,14 +57,16 @@ class ProjectResource extends Resource
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('time_left')
-                    ->formatStateUsing(fn($record) => $record->time_left < 0 ? 'Overdue' : $record->time_left . ' days')
+                    ->formatStateUsing(fn($record): string => $record->time_left < 0 ? 'Overdue' : $record->time_left . ' days')
                     ->badge()
-                    ->color(function ($record) {
+                    ->color(function ($record): string {
                         if ($record->time_left < 0) {
                             return 'gray';
-                        } elseif ($record->time_left < 5) {
+                        }
+                        if ($record->time_left < 5) {
                             return 'warning';
-                        } else {
+                        }
+                        else {
                             return 'primary';
                         }
                     })
@@ -94,16 +96,14 @@ class ProjectResource extends Resource
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('status')
                     ->label('Status')
-                    ->fillForm(function ($record) {
-                        return [
-                            'status' => $record->status,
-                        ];
-                    })
+                    ->fillForm(fn($record): array => [
+                        'status' => $record->status,
+                    ])
                     ->form([
                         Forms\Components\Select::make('status')
                             ->options(Status::class)
                     ])
-                    ->action(function (array $data, $record) {
+                    ->action(function (array $data, $record): void {
                         $record->status = $data['status'];
                         $record->save();
                     }),

@@ -7,6 +7,9 @@ use App\Models\Project;
 use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Task>
+ */
 class TaskFactory extends Factory
 {
     /**
@@ -22,12 +25,12 @@ class TaskFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
-            'description' => $this->faker->text(),
-            'start_date' => $this->faker->dateTime(),
-            'end_date' => $this->faker->dateTime(),
-            'duration' => $this->faker->word(),
-            'status' => $this->faker->word(),
+            'name' => fake()->name(),
+            'description' => fake()->text(),
+            'start_date' => fake()->dateTime(),
+            'end_date' => fake()->dateTime(),
+            'duration' => fake()->word(),
+            'status' => fake()->word(),
             'project_id' => Project::factory(),
             'company_id' => Company::factory(),
         ];

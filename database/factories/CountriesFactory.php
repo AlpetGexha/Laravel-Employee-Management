@@ -6,6 +6,9 @@ use App\Models\Company;
 use App\Models\Countries;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Countries>
+ */
 class CountriesFactory extends Factory
 {
     /**
@@ -21,8 +24,8 @@ class CountriesFactory extends Factory
     public function definition(): array
     {
         return [
-            'country_code' => $this->faker->countryCode(),
-            'name' => $this->faker->country(),
+            'country_code' => fake()->countryCode(),
+            'name' => fake()->country(),
             'company_id' => Company::factory(),
         ];
     }

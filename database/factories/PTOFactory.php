@@ -8,6 +8,9 @@ use App\Models\PTO;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\PTO>
+ */
 class PTOFactory extends Factory
 {
     /**
@@ -23,12 +26,12 @@ class PTOFactory extends Factory
     public function definition(): array
     {
         return [
-            'from_date' => $this->faker->dateTime(),
-            'to_date' => $this->faker->dateTime(),
+            'from_date' => fake()->dateTime(),
+            'to_date' => fake()->dateTime(),
 //            'days' => $this->faker->word(),
-            'leave_type' => $this->faker->randomElement(\App\Enums\LeaveType::toArray()),
-            'reason' => $this->faker->sentence(),
-            'is_approved' => $this->faker->boolean(),
+            'leave_type' => fake()->randomElement(\App\Enums\LeaveType::toArray()),
+            'reason' => fake()->sentence(),
+            'is_approved' => fake()->boolean(),
             'company_id' => Company::factory(),
           ];
     }

@@ -75,7 +75,7 @@ class AddCompanyEmployee implements AddsCompanyEmployees
      */
     protected function ensureUserIsNotAlreadyOnCompany(Company $company, string $email): Closure
     {
-        return static function ($validator) use ($company, $email) {
+        return static function ($validator) use ($company, $email): void {
             $validator->errors()->addIf(
                 $company->hasUserWithEmail($email),
                 'email',

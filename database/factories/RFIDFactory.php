@@ -7,6 +7,9 @@ use App\Models\RFID;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
+/**
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\RFID>
+ */
 class RFIDFactory extends Factory
 {
     /**
@@ -22,7 +25,7 @@ class RFIDFactory extends Factory
     public function definition(): array
     {
         return [
-            'code' => $this->faker->word(),
+            'code' => fake()->word(),
             //            'user_id' => User::factory(),
             'company_id' => Company::factory(),
         ];
