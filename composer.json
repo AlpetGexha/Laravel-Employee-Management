@@ -17,6 +17,7 @@
         "barryvdh/laravel-debugbar": "^3.14",
         "barryvdh/laravel-ide-helper": "^3.1",
         "beyondcode/laravel-query-detector": "^2.0",
+        "driftingly/rector-laravel": "^2.0",
         "fakerphp/faker": "^1.23",
         "laravel-shift/blueprint": "^2.10",
         "laravel/pail": "^1.1",
