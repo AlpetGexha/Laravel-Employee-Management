@@ -55,7 +55,7 @@ class DatabaseSeeder extends Seeder
         $this->command->info('Employee');
         $this->withProgressBar(100, fn() => Employee::factory()
             ->hasPto()
-            ->hasRfid()
+            ->hasRFID()
             ->hasProjects()
             ->hasTasks(random_int(1, 10))
             ->has(Payroll::factory()->for(SalaryStructures::factory())->count(random_int(1, 5)))
