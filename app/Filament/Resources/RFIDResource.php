@@ -24,9 +24,6 @@ class RFIDResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
-                    ->required(),
                 Forms\Components\Select::make('employee_id')
                     ->relationship('employee', 'id')
                     ->required(),
@@ -40,9 +37,6 @@ class RFIDResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('company.name')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('employee.id')
                     ->numeric()
                     ->sortable(),
