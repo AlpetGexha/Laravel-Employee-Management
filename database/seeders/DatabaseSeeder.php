@@ -41,10 +41,10 @@ class DatabaseSeeder extends Seeder
 
         $this->command->info('Seeding Contries');
 
-        $this->withProgressBar(20, fn() => Countries::factory()->create());
+        $this->withProgressBar(20, fn () => Countries::factory()->create());
 
         $this->command->info('Seedin Cities');
-        $this->withProgressBar(10, fn() => Cities::factory()
+        $this->withProgressBar(10, fn () => Cities::factory()
             ->for(
                 States::factory()
                     ->for(Countries::factory())
@@ -53,7 +53,7 @@ class DatabaseSeeder extends Seeder
             ->create());
 
         $this->command->info('Employee');
-        $this->withProgressBar(100, fn() => Employee::factory()
+        $this->withProgressBar(100, fn () => Employee::factory()
             ->hasPto()
             ->hasRFID()
             ->hasProjects()
@@ -76,12 +76,12 @@ class DatabaseSeeder extends Seeder
             ->create());
 
         $this->command->info('RFID');
-        $this->withProgressBar(10, fn() => RFID::factory()
-            ->state(fn(array $attributes): array => ['employee_id' => Employee::inRandomOrder()->first()->id])
+        $this->withProgressBar(10, fn () => RFID::factory()
+            ->state(fn (array $attributes): array => ['employee_id' => Employee::inRandomOrder()->first()->id])
             ->create());
 
         $this->command->info('Projects');
-        $this->withProgressBar(10, fn() => Project::factory()
+        $this->withProgressBar(10, fn () => Project::factory()
             ->has(Task::factory()->count(random_int(20, 60)))
             ->create());
 

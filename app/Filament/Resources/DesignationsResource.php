@@ -71,7 +71,7 @@ class DesignationsResource extends Resource
     {
         return [
             'index' => Pages\ListDesignations::route('/'),
-//            'create' => Pages\CreateDesignations::route('/create'),
+            //            'create' => Pages\CreateDesignations::route('/create'),
             'edit' => Pages\EditDesignations::route('/{record}/edit'),
         ];
     }

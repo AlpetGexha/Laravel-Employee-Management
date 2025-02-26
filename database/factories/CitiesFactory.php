@@ -4,7 +4,6 @@ namespace Database\Factories;
 
 use App\Models\Cities;
 use App\Models\Company;
-use App\Models\States;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**

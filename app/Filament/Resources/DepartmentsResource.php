@@ -47,9 +47,9 @@ class DepartmentsResource extends Resource
                     ->withCount('employees');
             })
             ->columns([
-//                Tables\Columns\TextColumn::make('company.name')
-//                    ->numeric()
-//                    ->sortable(),
+                //                Tables\Columns\TextColumn::make('company.name')
+                //                    ->numeric()
+                //                    ->sortable(),
                 Tables\Columns\TextColumn::make('department_code')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('name')

@@ -7,7 +7,6 @@ use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers\EmployeesRelationManager;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Models\Project;
-use Filament\Actions\Action;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -44,7 +43,7 @@ class ProjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn($query) => $query->withCount('employees', 'tasks'))
+            ->modifyQueryUsing(fn ($query) => $query->withCount('employees', 'tasks'))
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
@@ -57,7 +56,7 @@ class ProjectResource extends Resource
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('time_left')
-                    ->formatStateUsing(fn($record): string => $record->time_left < 0 ? 'Overdue' : $record->time_left . ' days')
+                    ->formatStateUsing(fn ($record): string => $record->time_left < 0 ? 'Overdue' : $record->time_left . ' days')
                     ->badge()
                     ->color(function ($record): string {
                         if ($record->time_left < 0) {
@@ -65,8 +64,7 @@ class ProjectResource extends Resource
                         }
                         if ($record->time_left < 5) {
                             return 'warning';
-                        }
-                        else {
+                        } else {
                             return 'primary';
                         }
                     })
@@ -96,12 +94,12 @@ class ProjectResource extends Resource
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('status')
                     ->label('Status')
-                    ->fillForm(fn($record): array => [
+                    ->fillForm(fn ($record): array => [
                         'status' => $record->status,
                     ])
                     ->form([
                         Forms\Components\Select::make('status')
-                            ->options(Status::class)
+                            ->options(Status::class),
                     ])
                     ->action(function (array $data, $record): void {
                         $record->status = $data['status'];

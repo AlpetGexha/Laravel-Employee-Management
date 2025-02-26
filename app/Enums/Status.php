@@ -11,7 +11,7 @@ enum Status: string implements HasColor
     case Completed = 'completed';
     case Canceled = 'canceled';
 
-    function getColor(): string|array|null
+    public function getColor(): string|array|null
     {
         return match ($this) {
             self::Pending => 'gray',
@@ -21,6 +21,3 @@ enum Status: string implements HasColor
         };
     }
 }
-
-
-

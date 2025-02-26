@@ -44,11 +44,6 @@ class Project extends Model
         return $this->belongsTo(Company::class);
     }
 
-    protected function timeLeft(): \Illuminate\Database\Eloquent\Casts\Attribute
-    {
-        return \Illuminate\Database\Eloquent\Casts\Attribute::make(get: fn() => now()->diffInDays($this->end_date));
-    }
-
     public function employees(): BelongsToMany
     {
         return $this->belongsToMany(Employee::class);
@@ -57,5 +52,10 @@ class Project extends Model
     public function tasks(): HasMany
     {
         return $this->hasMany(Task::class);
+    }
+
+    protected function timeLeft(): \Illuminate\Database\Eloquent\Casts\Attribute
+    {
+        return \Illuminate\Database\Eloquent\Casts\Attribute::make(get: fn () => now()->diffInDays($this->end_date));
     }
 }

@@ -33,18 +33,18 @@ class TasksRelationManager extends RelationManager
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('assign')
                     ->label('Assign')
-                    ->fillForm(fn($record): array => [
+                    ->fillForm(fn ($record): array => [
                         'employees' => $record->employee_id,
                     ])
                     ->form([
                         Forms\Components\Select::make('employees')
-                            ->options(fn(RelationManager $livewire) => $livewire->getOwnerRecord()->employees->pluck('first_name', 'id'))
+                            ->options(fn (RelationManager $livewire) => $livewire->getOwnerRecord()->employees->pluck('first_name', 'id')),
 
                     ])
                     ->action(function (array $data, $record): void {
                         $record->employee_id = $data['employees'];
                         $record->save();
-                    })
+                    }),
 
             ])
             ->bulkActions([
