@@ -4,6 +4,7 @@ namespace App\Providers\Filament;
 
 use App\Models\Company;
 use Filament\Http\Middleware\Authenticate;
+use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
@@ -15,34 +16,38 @@ use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Routing\Middleware\SubstituteBindings;
-use Illuminate\Session\Middleware\AuthenticateSession;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Wallo\FilamentCompanies\FilamentCompanies;
 use Wallo\FilamentCompanies\Pages\Company\CompanySettings;
 use Wallo\FilamentCompanies\Pages\Company\CreateCompany;
 
-class AdminPanelProvider extends PanelProvider
+class CompanyPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
         return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin')
+            ->id('company')
+            ->path('company')
             ->login()
             ->registration()
             ->colors([
                 'primary' => Color::Indigo,
                 'gray' => Color::Slate,
             ])
-            ->sidebarCollapsibleOnDesktop()
+            ->tenant(Company::class)
+            ->tenantProfile(CompanySettings::class)
+            ->tenantRegistration(CreateCompany::class)
+            ->login()
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->discoverPages(in: app_path('Filament/Company/Pages'), for: 'App\\Filament\\Pages')
+            ->resources([
+
+            ])
             ->pages([
                 Pages\Dashboard::class,
             ])
-            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->discoverWidgets(in: app_path('Filament/Company/Widgets'), for: 'App\\Filament\\Company\\Widgets')
             ->widgets([
                 Widgets\AccountWidget::class,
                 Widgets\FilamentInfoWidget::class,
@@ -60,6 +65,21 @@ class AdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
-            ]);
+            ])
+            ->plugin(
+                FilamentCompanies::make()
+                    ->userPanel('admin')
+                    ->switchCurrentCompany()
+                    ->updateProfileInformation()
+                    ->updatePasswords()
+                    ->manageBrowserSessions()
+                    ->accountDeletion()
+                    ->profilePhotos()
+                    ->api()
+                    ->companies(invitations: true)
+                    ->termsAndPrivacyPolicy()
+                    ->notifications()
+                    ->modals(),
+            );
     }
 }

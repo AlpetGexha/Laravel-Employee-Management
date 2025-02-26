@@ -9,22 +9,19 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use Wallo\FilamentCompanies\FilamentCompanies;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\User>
- */
 class UserFactory extends Factory
 {
-    /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password = null;
-
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
     protected $model = User::class;
+
+    /**
+     * The current password being used by the factory.
+     */
+    protected static ?string $password = null;
 
     /**
      * Define the model's default state.
@@ -49,7 +46,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes): array => [
+        return $this->state(fn (array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
@@ -65,7 +62,7 @@ class UserFactory extends Factory
 
         return $this->has(
             Company::factory()
-                ->state(fn (array $attributes, User $user): array => [
+                ->state(fn (array $attributes, User $user) => [
                     'name' => $user->name . '\'s Company',
                     'user_id' => $user->id,
                     'personal_company' => true,

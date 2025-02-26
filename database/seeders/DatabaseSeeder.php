@@ -2,24 +2,9 @@
 
 namespace Database\Seeders;
 
-use App\Models\Attendances;
-use App\Models\Cities;
-use App\Models\Countries;
-use App\Models\Departments;
-use App\Models\Employee;
-use App\Models\Payroll;
-use App\Models\Project;
-use App\Models\RFID;
-use App\Models\SalaryStructures;
-use App\Models\States;
-use App\Models\Task;
 use App\Models\User;
-use Closure;
-use Illuminate\Database\Seeder;
-use Illuminate\Support\Collection;
-use Symfony\Component\Console\Helper\ProgressBar;
-
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -30,84 +15,9 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->withPersonalCompany()->create();
 
-        $admin = User::factory()->withPersonalCompany()->create([
+        User::factory()->withPersonalCompany()->create([
             'name' => 'Test User',
             'email' => 'test@example.com',
         ]);
-
-        $admin->update([
-            'current_company_id' => 1,
-        ]);
-
-        $this->command->info('Seeding Contries');
-
-        $this->withProgressBar(20, fn () => Countries::factory()->create());
-
-        $this->command->info('Seedin Cities');
-        $this->withProgressBar(10, fn () => Cities::factory()
-            ->for(
-                States::factory()
-                    ->for(Countries::factory())
-            )
-            ->count(random_int(1, 10))
-            ->create());
-
-        $this->command->info('Employee');
-        $this->withProgressBar(100, fn () => Employee::factory()
-            ->hasPto()
-            ->hasRFID()
-            ->hasProjects()
-            ->hasTasks(random_int(1, 10))
-            ->has(Payroll::factory()->for(SalaryStructures::factory())->count(random_int(1, 5)))
-            ->for(Countries::factory())
-            ->for(
-                States::factory()
-                    ->for(Countries::factory())
-            )
-            ->for(Cities::factory()
-                ->for(
-                    States::factory()
-                        ->for(Countries::factory()
-                        )
-                )
-            )
-            ->for(Departments::factory())
-            ->for(SalaryStructures::factory())
-            ->create());
-
-        $this->command->info('RFID');
-        $this->withProgressBar(10, fn () => RFID::factory()
-            ->state(fn (array $attributes): array => ['employee_id' => Employee::inRandomOrder()->first()->id])
-            ->create());
-
-        $this->command->info('Projects');
-        $this->withProgressBar(10, fn () => Project::factory()
-            ->has(Task::factory()->count(random_int(20, 60)))
-            ->create());
-
-        Attendances::factory()->count(500)->create();
-
-    }
-
-    protected function withProgressBar(int $amount, Closure $createCollectionOfOne): Collection
-    {
-        $progressBar = new ProgressBar($this->command->getOutput(), $amount);
-
-        $progressBar->start();
-
-        $items = new Collection;
-
-        foreach (range(1, $amount) as $i) {
-            $items = $items->merge(
-                $createCollectionOfOne()
-            );
-            $progressBar->advance();
-        }
-
-        $progressBar->finish();
-
-        $this->command->getOutput()->writeln('');
-
-        return $items;
     }
 }

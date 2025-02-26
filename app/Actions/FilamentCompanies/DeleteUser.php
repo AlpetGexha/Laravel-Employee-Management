@@ -24,7 +24,7 @@ class DeleteUser implements DeletesUsers
      */
     public function delete(User $user): void
     {
-        DB::transaction(function () use ($user): void {
+        DB::transaction(function () use ($user) {
             $this->deleteCompanies($user);
             $user->deleteProfilePhoto();
             $user->tokens->each(static fn (PersonalAccessToken $token) => $token->delete());
@@ -39,7 +39,7 @@ class DeleteUser implements DeletesUsers
     {
         $user->companies()->detach();
 
-        $user->ownedCompanies->each(function (Company $company): void {
+        $user->ownedCompanies->each(function (Company $company) {
             $this->deletesCompanies->delete($company);
         });
     }

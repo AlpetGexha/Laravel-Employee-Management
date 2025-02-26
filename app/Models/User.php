@@ -54,6 +54,19 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasDefaul
         'profile_photo_url',
     ];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
+
     public function canAccessPanel(Panel $panel): bool
     {
         return true;
@@ -64,7 +77,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasDefaul
         return $this->belongsToCompany($tenant);
     }
 
-    public function getTenants(Panel $panel): array|Collection
+    public function getTenants(Panel $panel): array | Collection
     {
         return $this->allCompanies();
     }
@@ -77,18 +90,5 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasDefaul
     public function getFilamentAvatarUrl(): string
     {
         return $this->profile_photo_url;
-    }
-
-    /**
-     * Get the attributes that should be cast.
-     *
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    {
-        return [
-            'email_verified_at' => 'datetime',
-            'password' => 'hashed',
-        ];
     }
 }

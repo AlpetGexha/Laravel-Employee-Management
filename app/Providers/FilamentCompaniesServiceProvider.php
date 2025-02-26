@@ -12,6 +12,7 @@ use App\Actions\FilamentCompanies\UpdateCompanyName;
 use App\Actions\FilamentCompanies\UpdateUserPassword;
 use App\Actions\FilamentCompanies\UpdateUserProfileInformation;
 use App\Models\Company;
+use Filament\Facades\Filament;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -46,7 +47,15 @@ class FilamentCompaniesServiceProvider extends PanelProvider
             ->default()
             ->login(Login::class)
             ->passwordReset()
-            ->homeUrl(static fn (): string => url(Pages\Dashboard::getUrl(panel: 'company', tenant: Auth::user()?->personalCompany())))
+            ->homeUrl(static function (): ?string {
+                $user = Auth::user();
+
+                if ($company = $user?->primaryCompany()) {
+                    return Pages\Dashboard::getUrl(panel: FilamentCompanies::getCompanyPanel(), tenant: $company);
+                }
+
+                return Filament::getPanel(FilamentCompanies::getCompanyPanel())->getTenantRegistrationUrl();
+            })
             ->plugin(
                 FilamentCompanies::make()
                     ->userPanel('admin')
@@ -58,6 +67,7 @@ class FilamentCompaniesServiceProvider extends PanelProvider
                     ->profilePhotos()
                     ->api()
                     ->companies(invitations: true)
+                    ->autoAcceptInvitations()
                     ->termsAndPrivacyPolicy()
                     ->notifications()
                     ->modals(),
@@ -78,7 +88,7 @@ class FilamentCompaniesServiceProvider extends PanelProvider
                 'profile' => MenuItem::make()
                     ->label('Profile')
                     ->icon('heroicon-o-user-circle')
-                    ->url(static fn () => route(Profile::getRouteName(panel: 'admin'))),
+                    ->url(static fn () => Profile::getUrl(panel: FilamentCompanies::getUserPanel())),
             ])
             ->authGuard('web')
             ->discoverWidgets(in: app_path('Filament/Company/Widgets'), for: 'App\\Filament\\Company\\Widgets')
