@@ -11,14 +11,14 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('customers', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table): void {
             $table->id();
             $table->foreignIdFor(Company::class)->constrained();
             $table->string('name');
             $table->string('email')->nullable()->unique();
             $table->string('phone')->nullable();
             $table->string('address')->nullable();
-            $table->string('is_organization')->default(false);
+            $table->boolean('is_organization')->default(false);
             $table->timestamps();
         });
     }

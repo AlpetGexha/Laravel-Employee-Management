@@ -16,8 +16,9 @@ trait EnsureCompany
         //        static::addGlobalScope(new \App\Models\Scopes\EnsureCompany);
 
         static::creating(function ($model): void {
-            if ($model->company_id === null)
+            if ($model->company_id === null) {
                 $model->company_id = auth()->user()->current_company_id;
+            }
         });
         // }
     }

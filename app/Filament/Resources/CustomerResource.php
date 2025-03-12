@@ -10,8 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class CustomerResource extends Resource
 {
@@ -29,18 +27,25 @@ class CustomerResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('email')
-                    ->email(),
+                    ->email()
+                    ->unique(),
                 Forms\Components\TextInput::make('phone')
+                    ->nullable()
                     ->tel(),
-                Forms\Components\TextInput::make('address'),
-                Forms\Components\TextInput::make('is_organization')
-                    ->required(),
+                Forms\Components\TextInput::make('address')
+                    ->nullable(),
+                Forms\Components\Toggle::make('is_organization')
+                    ->label('Is Organization')
+                    ->default(false),
             ]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(function ($query): void {
+                $query->withCount('sales');
+            })
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
@@ -50,7 +55,23 @@ class CustomerResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('address')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('is_organization')
+                Tables\Columns\BadgeColumn::make('is_organization')
+                    ->formatStateUsing(static fn($state): string => $state ? 'Organization' : 'Individual')
+                    ->colors([
+                        'primary',
+                        'success' => static fn($state): bool => $state === 1,
+                    ])
+                    ->icon(static function ($state): string {
+                        if ($state === 0) {
+                            return 'heroicon-o-user';
+                        }
+
+                        return 'heroicon-o-building-office';
+                    })
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('sales_count')
+                    ->label('Sales')
+                    ->sortable()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

@@ -90,6 +90,21 @@ class Company extends FilamentCompaniesCompany implements HasAvatar
         return $this->hasMany(PTO::class);
     }
 
+    public function sales(): HasMany
+    {
+        return $this->hasMany(Sale::class);
+    }
+
+    public function customers(): HasMany
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    public function product(): HasMany
+    {
+        return $this->hasMany(Product::class);
+    }
+
 
     /**
      * Get the attributes that should be cast.

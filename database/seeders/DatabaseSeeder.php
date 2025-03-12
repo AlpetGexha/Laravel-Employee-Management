@@ -40,52 +40,40 @@ class DatabaseSeeder extends Seeder
 
         $this->command->info('Seedin Contries');
 
-        $ez = $this->withProgressBar(20, function () {
-            return Countries::factory()->create();
-        });
+        $this->withProgressBar(20, fn() => Countries::factory()->create());
 
         $this->command->info('Seedin Cities');
-        $countries = $this->withProgressBar(10, function () {
-            return Cities::factory()
-                ->for(
-                    States::factory()
-                        ->for(Countries::factory())
-                )
-                ->count(rand(1, 10))
-                ->create();
-        });
+        $this->withProgressBar(10, fn() => Cities::factory()
+            ->for(
+                States::factory()
+                    ->for(Countries::factory())
+            )
+            ->count(random_int(1, 10))
+            ->create());
 
         $this->command->info('Employee');
-        $employees = $this->withProgressBar(100, function () {
-            return Employee::factory()
-                ->for(Countries::factory())
-                ->for(States::factory()
-                    ->for(Countries::factory()))
-                ->for(Cities::factory()
-                    ->for(
-                        States::factory()
-                            ->for(Countries::factory())))
-                ->for(Departments::factory())
-                ->for(SalaryStructures::factory())
-                ->has(Payroll::factory()->count(rand(1, 5)))
-                ->create();
-        });
+        $this->withProgressBar(100, fn() => Employee::factory()
+            ->for(Countries::factory())
+            ->for(States::factory()
+                ->for(Countries::factory()))
+            ->for(Cities::factory()
+                ->for(
+                    States::factory()
+                        ->for(Countries::factory())))
+            ->for(Departments::factory())
+            ->for(SalaryStructures::factory())
+            ->has(Payroll::factory()->count(random_int(1, 5)))
+            ->create());
 
         $this->command->info('RFID');
-        $rfid = $this->withProgressBar(10, function () {
-            return RFID::factory()
-                ->state(function (array $attributes) {
-                    return ['employee_id' => Employee::inRandomOrder()->first()->id];
-                })
-                ->create();
-        });
+        $this->withProgressBar(10, fn() => RFID::factory()
+            ->state(fn(array $attributes): array => ['employee_id' => Employee::inRandomOrder()->first()->id])
+            ->create());
 
         $this->command->info('Projects');
-        $projects = $this->withProgressBar(10, function () {
-            return Project::factory()
-                ->has(Task::factory()->count(rand(20, 60)))
-                ->create();
-        });
+        $this->withProgressBar(10, fn() => Project::factory()
+            ->has(Task::factory()->count(random_int(20, 60)))
+            ->create());
 
         //        $employee = $this->withProgressBar(10, function () {
         //            return Employee::factory()
