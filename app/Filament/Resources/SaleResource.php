@@ -46,13 +46,10 @@ class SaleResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('company.name')
+                Tables\Columns\TextColumn::make('customer_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('product_id')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('customer_id')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('quantity')
