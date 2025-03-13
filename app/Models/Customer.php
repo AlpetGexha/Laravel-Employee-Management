@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Customer extends Model
 {
-    use HasFactory, EnsureCompany;
+    use EnsureCompany, HasFactory;
 
     protected $fillable = [
         'company_id',
@@ -16,7 +16,7 @@ class Customer extends Model
         'email',
         'phone',
         'address',
-        'is_organization'
+        'is_organization',
     ];
 
     public function sales()

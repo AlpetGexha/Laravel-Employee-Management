@@ -105,7 +105,6 @@ class Company extends FilamentCompaniesCompany implements HasAvatar
         return $this->hasMany(Product::class);
     }
 
-
     /**
      * Get the attributes that should be cast.
      *

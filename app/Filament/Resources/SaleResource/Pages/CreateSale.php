@@ -13,11 +13,10 @@ class CreateSale extends CreateRecord
 
     protected function handleRecordCreation(array $data): Model
     {
-        if (!isset($data['total_price'])) {
+        if (! isset($data['total_price'])) {
             $price = Product::findOrFail($data['product_id'])->price;
             $data['total_price'] = $price * $data['quantity'];
         }
-
 
         return static::getModel()::create($data);
     }

@@ -3,12 +3,12 @@
 namespace App\Filament\Company\Widgets;
 
 use App\Models\Company;
-use App\Models\User;
 use App\Models\Employee;
 use App\Models\Payroll;
 use App\Models\Project;
 use App\Models\PTO;
 use App\Models\Task;
+use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
 

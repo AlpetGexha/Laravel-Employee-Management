@@ -3,8 +3,8 @@
 namespace App\Filament\Company\Widgets;
 
 use App\Models\Company;
-use App\Models\User;
 use App\Models\Employee;
+use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
 use Filament\Widgets\StatsOverviewWidget\Card;
 

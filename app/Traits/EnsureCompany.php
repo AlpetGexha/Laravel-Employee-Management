@@ -30,9 +30,9 @@ trait EnsureCompany
 
     public function scopeEnsureCompany(Builder $query): Builder
     {
-//        if (auth()->check()) {
+        //        if (auth()->check()) {
         return $query->where('company_id', auth()->user()->current_company_id);
-//        }
+        //        }
     }
 
     public function isOnSameCompany(): bool

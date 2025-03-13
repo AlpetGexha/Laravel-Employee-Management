@@ -9,13 +9,13 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Product extends Model
 {
-    use HasFactory, EnsureCompany;
+    use EnsureCompany, HasFactory;
 
     protected $fillable = [
         'company_id',
         'name',
         'price',
-        'description'
+        'description',
     ];
 
     public function sales(): HasMany

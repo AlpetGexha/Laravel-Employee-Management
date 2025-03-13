@@ -9,14 +9,14 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Sale extends Model
 {
-    use HasFactory, EnsureCompany;
+    use EnsureCompany, HasFactory;
 
     protected $fillable = [
         'company_id',
         'product_id',
         'customer_id',
         'quantity',
-        'total_price'
+        'total_price',
     ];
 
     public function product(): BelongsTo

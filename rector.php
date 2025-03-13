@@ -20,8 +20,8 @@ return RectorConfig::configure()
     ->withConfiguredRule(\RectorLaravel\Rector\StaticCall\EloquentMagicMethodToQueryBuilderRector::class, [
         'Eloquent' => 'Illuminate\Database\Eloquent\Model',
         'magicMethods' => [
-            '*'
-        ]
+            '*',
+        ],
     ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
