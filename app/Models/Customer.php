@@ -13,7 +13,10 @@ class Customer extends Model
     protected $fillable = [
         'company_id',
         'name',
-        'email'
+        'email',
+        'phone',
+        'address',
+        'is_organization'
     ];
 
     public function sales()

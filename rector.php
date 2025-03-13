@@ -17,6 +17,12 @@ return RectorConfig::configure()
         TypedPropertyFromStrictConstructorRector::class,
         NewInInitializerRector::class,
     ])
+    ->withConfiguredRule(\RectorLaravel\Rector\StaticCall\EloquentMagicMethodToQueryBuilderRector::class, [
+        'Eloquent' => 'Illuminate\Database\Eloquent\Model',
+        'magicMethods' => [
+            '*'
+        ]
+    ])
     ->withSkip([
         AddOverrideAttributeToOverriddenMethodsRector::class,
         ModelCastsPropertyToCastsMethodRector::class,

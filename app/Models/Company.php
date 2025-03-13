@@ -100,7 +100,7 @@ class Company extends FilamentCompaniesCompany implements HasAvatar
         return $this->hasMany(Customer::class);
     }
 
-    public function product(): HasMany
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }

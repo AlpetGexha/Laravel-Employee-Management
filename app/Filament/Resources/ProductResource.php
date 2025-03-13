@@ -10,8 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class ProductResource extends Resource
 {
@@ -27,7 +25,14 @@ class ProductResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull(),
+
+                Forms\Components\MarkdownEditor::make('description')
+                    ->label('Description')
+                    ->nullable()
+                    ->columnSpanFull(),
+
                 Forms\Components\TextInput::make('price')
                     ->required()
                     ->numeric()

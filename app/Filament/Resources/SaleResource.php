@@ -3,15 +3,12 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\SaleResource\Pages;
-use App\Filament\Resources\SaleResource\RelationManagers;
 use App\Models\Sale;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class SaleResource extends Resource
 {
@@ -24,21 +21,23 @@ class SaleResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
+//            ->before
             ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
+                Forms\Components\Select::make('customer_id')
+                    ->relationship('customer', 'name')
                     ->required(),
-                Forms\Components\TextInput::make('product_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('customer_id')
-                    ->required()
-                    ->numeric(),
+                Forms\Components\Select::make('product_id')
+                    ->reactive()
+                    ->relationship('product', 'name')
+                    ->searchable()
+                    ->preload()
+                    ->required(),
                 Forms\Components\TextInput::make('quantity')
                     ->required()
                     ->numeric(),
                 Forms\Components\TextInput::make('total_price')
-                    ->required()
+                    ->helperText('This field is automatically calculated based on the product price and quantity. Fill this only if you want to override the calculated value.')
+                    ->nullable()
                     ->numeric(),
             ]);
     }
@@ -60,6 +59,9 @@ class SaleResource extends Resource
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('total_price')
+                    ->badge()
+                    ->color('success')
+                    ->icon('heroicon-o-currency-dollar')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')

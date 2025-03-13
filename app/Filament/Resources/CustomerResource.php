@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\CustomerResource\Pages;
 use App\Filament\Resources\CustomerResource\RelationManagers;
+use App\Filament\Resources\SaleResource\RelationManagers\SalesRelationManager;
 use App\Models\Customer;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -27,16 +28,14 @@ class CustomerResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->required(),
                 Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->unique(),
+                    ->email(),
                 Forms\Components\TextInput::make('phone')
                     ->nullable()
                     ->tel(),
                 Forms\Components\TextInput::make('address')
                     ->nullable(),
-                Forms\Components\Toggle::make('is_organization')
-                    ->label('Is Organization')
-                    ->default(false),
+                Forms\Components\Checkbox::make('is_organization')
+                    ->label('Is Organization'),
             ]);
     }
 
@@ -98,7 +97,7 @@ class CustomerResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            SalesRelationManager::class,
         ];
     }
 
