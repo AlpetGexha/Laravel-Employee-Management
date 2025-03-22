@@ -17,10 +17,7 @@ class SendContactMailJob implements ShouldQueue
      */
     public function __construct(
         public Contact $contact,
-    )
-    {
-
-    }
+    ) {}
 
     /**
      * Execute the job.

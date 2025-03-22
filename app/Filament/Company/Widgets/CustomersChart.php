@@ -2,9 +2,9 @@
 
 namespace App\Filament\Company\Widgets;
 
-use Filament\Widgets\BarChartWidget;
 use App\Models\Customer;
 use Carbon\Carbon;
+use Filament\Widgets\BarChartWidget;
 
 class CustomersChart extends BarChartWidget
 {

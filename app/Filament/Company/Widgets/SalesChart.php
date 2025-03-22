@@ -21,7 +21,7 @@ class SalesChart extends LineChartWidget
                 [
                     'label' => 'Sales',
                     'data' => $sales->pluck('total')->toArray(),
-//                    success color
+                    //                    success color
                     'backgroundColor' => 'rgba(0, 255, 0, 0.1)',
                     'borderColor' => 'rgba(0, 255, 0, 1)',
                     'pointBackgroundColor' => 'rgba(0, 255, 0, 1)',

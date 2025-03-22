@@ -1,5 +1,5 @@
 <x-mail::message>
-# U got new email from {{ $contact->email  }}
+# U got new email from {{ $contact->email }}
 Subject: {{ $contact->subject }}<br>
 Name: {{ $contact->name }}<br>
 Email: {{ $contact->email }}<br>

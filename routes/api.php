@@ -14,6 +14,6 @@ Route::post('contact', function (CreateContactAction $action, CreateContactReque
     $action->handle($request);
 
     return response()->json([
-        'message' => 'Contact created successfully, we will get back to you soon.'
+        'message' => 'Contact created successfully, we will get back to you soon.',
     ], 200);
 })->middleware('throttle:contact');
