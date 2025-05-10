@@ -1,33 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-layout>
+  <x-slot name="title">Employee Management | Login</x-slot>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee Management | Login</title>
+  <!-- ====== Banner Start ====== -->
+  <x-page-banner :title="'Login'" />
+  <!-- ====== Banner End ====== -->
 
-  <!--====== Favicon Icon ======-->
-  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg" />
-
-  <!-- ===== All CSS files ===== -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/animate.css" />
-  <link rel="stylesheet" href="assets/css/lineicons.css" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-</head>
-
-<body>
-  <!-- ====== Header Start ====== -->
-  <header class="ud-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <nav class="navbar navbar-expand-lg">
-            <a class="navbar-brand" href="index.html">
-              <img src="assets/images/logo/logo.svg" alt="Logo" />
-            </a>
-            <button class="navbar-toggler">
+  <!-- ====== Login Content Start ====== -->
               <span class="toggler-icon"> </span>
               <span class="toggler-icon"> </span>
               <span class="toggler-icon"> </span>
@@ -86,21 +64,21 @@
   </section>
   <!-- ====== Banner End ====== -->
 
-  <!-- ====== Login Start ====== -->
-  <section class="ud-login">
+    <section class="ud-login">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
           <div class="ud-login-wrapper" id="login-wrapper">
             <div class="ud-login-logo">
-              <img src="assets/images/logo/logo-2.svg" alt="logo" />
+              <img src="{{ asset('assets/images/logo/logo-2.svg') }}" alt="logo" />
             </div>
-            <form class="ud-login-form">
+            <form class="ud-login-form" method="POST" action="{{ route('login') }}">
+              @csrf
               <div class="ud-form-group">
-                <input type="email" name="email" placeholder="Email/username" />
+                <input type="email" name="email" placeholder="Email/username" required />
               </div>
               <div class="ud-form-group">
-                <input type="password" name="password" placeholder="*********" />
+                <input type="password" name="password" placeholder="*********" required />
               </div>
               <div class="ud-form-group">
                 <button type="submit" class="ud-main-btn w-100">Login</button>
@@ -119,8 +97,7 @@
                 <li>
                   <a href="javascript:void(0)" class="twitter">
                     <i class="lni lni-twitter-filled"></i>
-                  </a>
-                </li>
+                  </a>                </li>
                 <li>
                   <a href="javascript:void(0)" class="google">
                     <i class="lni lni-google"></i>
@@ -129,11 +106,11 @@
               </ul>
             </div>
 
-            <a class="forget-pass" href="javascript:void(0)">
-              Forget Password?
+            <a class="forget-pass" href="{{ route('password.request') }}">
+              Forgot Password?
             </a>
             <p class="signup-option">
-              Not a member yet? <a href="javascript:void(0)"> Sign Up </a>
+              Not a member yet? <a href="{{ route('register') }}"> Sign Up </a>
             </p>
           </div>
         </div>
@@ -141,9 +118,7 @@
     </div>
   </section>
   <!-- ====== Login End ====== -->
-
-  <!-- ====== Footer Start ====== -->
-  <footer class="ud-footer wow fadeInUp" data-wow-delay=".15s">
+</x-layout>
     <div class="shape shape-1">
       <img src="assets/images/footer/shape-1.svg" alt="shape" />
     </div>

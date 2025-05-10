@@ -1,100 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+<x-layout>
+  <x-slot name="title">Employee Management | Home</x-slot>
+  
+  <x-slot name="styles">
+    <!-- Additional meta tags for this page -->
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Employee Management Solution">
+    <meta name="description" content="Employee Management Solution Team">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Employee Management | Home </title>
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://employee-management.test">
+    <meta property="og:title" content="Employee Management Solution">
+    <meta property="og:description" content="Employee Management Solution Team">
+    <meta property="og:image" content="{{ asset('assets/images/favicon.svg') }}">
 
-  <!-- Primary Meta Tags -->
-  <meta name="title" content="Employee Menagment Soulution">
-  <meta name="description" content="Employee Menagment Soulution Team">
-
-  <!-- Open Graph / Facebook -->
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://employee-management.test">
-  <meta property="og:title" content="Employee Menagment Soulution">
-  <meta property="og:description" content="Employee Menagment Soulution Team">
-  <meta property="og:image" content="assets/images/favicon.svg">
-
-  <!-- Twitter -->
-  <meta property="twitter:card" content="summary_large_image">
-  <meta property="twitter:url" content="https://employee-management.test">
-  <meta property="twitter:title" content="Employee Menagment Soulution">
-  <meta property="twitter:description" content="Employee Menagment Soulution Team">
-  <meta property="twitter:image" content="assets/images/favicon.svg">
-
-  <!--====== Favicon Icon ======-->
-  <link rel="shortcut icon" href="assets/images/favicon.svg" type="image/svg" />
-
-  <!-- ===== All CSS files ===== -->
-  <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-  <link rel="stylesheet" href="assets/css/animate.css" />
-  <link rel="stylesheet" href="assets/css/lineicons.css" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
-
-
-  <!-- ====== All Javascript Files ====== -->
-  <script defer src="assets/js/bootstrap.bundle.min.js"></script>
-  <script defer src="assets/js/wow.min.js"></script>
-  <script defer src="assets/js/main.js"></script>
-</head>
-
-<body>
-  <!-- ====== Header Start ====== -->
-  <header class="ud-header">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-          <nav class="navbar navbar-expand-lg" id="nav">
-            <a class="navbar-brand" href="index.html">
-              <img src="assets/images/logo/logo.svg" alt="Logo" />
-            </a>
-            <button class="navbar-toggler">
-              <span class="toggler-icon"> </span>
-              <span class="toggler-icon"> </span>
-              <span class="toggler-icon"> </span>
-            </button>
-
-            <div class="navbar-collapse">
-              <ul id="nav" class="navbar-nav mx-auto">
-                <li class="nav-item">
-                  <a class="ud-menu-scroll active" href="index.html">Home</a>
-                </li>
-
-                <li class="nav-item">
-                  <a class="ud-menu-scroll" href="about.html">About</a>
-                </li>
-                <li class="nav-item">
-                  <a class="ud-menu-scroll" href="pricing.html">Pricing</a>
-                </li>
-                <li class="nav-item">
-                  <a class="ud-menu-scroll" href="blog.html">Blog</a>
-                </li>
-                <li class="nav-item">
-                  <a class="ud-menu-scroll" href="contact.html">Contact</a>
-                </li>
-                <li class="nav-item">
-                  <a class="ud-menu-scroll" href="Dokumentacioni.html">Docs</a>
-                </li>
-              </ul>
-            </div>
-
-            <div class="navbar-btn d-none d-sm-inline-block">
-              <a href="login.html" class="ud-main-btn ud-login-btn">
-                Sign In
-              </a>
-              <a class="ud-main-btn ud-white-btn" href="register.html">
-                Sign Up
-              </a>
-            </div>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://employee-management.test">
+    <meta property="twitter:title" content="Employee Management Solution">
+    <meta property="twitter:description" content="Employee Management Solution Team">
+    <meta property="twitter:image" content="{{ asset('assets/images/favicon.svg') }}">
+    
+    <!-- Additional styles for the home page -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox/dist/css/glightbox.min.css" />
+  </x-slot>
+  
+  <x-slot name="scripts">
+    <!-- Additional scripts for the home page -->
+    <script src="https://cdn.jsdelivr.net/gh/mcstudios/glightbox/dist/js/glightbox.min.js"></script>
+    <script>
+      //========= glightbox
+      const videoTwo = GLightbox({
+        selector: ".glightbox",
+        type: "video",
+        source: "youtube", //vimeo, youtube or local
+        width: 900,
+        autoplayVideos: true,
+      });
+    </script>
+  </x-slot>
   <!-- ====== Header End ====== -->
 
   <!-- ====== Hero Start ====== -->
