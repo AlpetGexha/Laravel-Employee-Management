@@ -50,7 +50,7 @@
                                 Sign Up
                             </a>
                         @else
-                            <a class="ud-main-btn ud-white-btn" href="{{ route('filament.company.pages.dashboard') }}">
+                            <a class="ud-main-btn ud-white-btn" href="{{ route('filament.company.auth.login') }}">
                                 Dashboard
                             </a>
                         @endguest
