@@ -10,7 +10,7 @@ trait EnsureCompany
 {
     public static function bootEnsureCompany(): void
     {
-        //         if (auth()->check()) {
+                if (auth()->check()) {
 
         //        this is only when we are using the compaby tenlet
         //        static::addGlobalScope(new \App\Models\Scopes\EnsureCompany);
@@ -21,7 +21,7 @@ trait EnsureCompany
             }
         });
 
-        // }
+        }
     }
 
     public function company(): BelongsTo
