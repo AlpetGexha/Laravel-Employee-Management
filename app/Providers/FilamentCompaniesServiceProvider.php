@@ -72,6 +72,7 @@ class FilamentCompaniesServiceProvider extends PanelProvider
                     ->notifications()
                     ->modals(),
             )
+
             ->registration(Register::class)
             ->colors([
                 'primary' => Color::Amber,

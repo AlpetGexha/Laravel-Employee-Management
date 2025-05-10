@@ -20,6 +20,7 @@ trait EnsureCompany
                 $model->company_id = auth()->user()->current_company_id;
             }
         });
+
         // }
     }
 

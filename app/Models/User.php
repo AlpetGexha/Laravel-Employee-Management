@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Traits\EnsureCompany;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Models\Contracts\HasAvatar;
 use Filament\Models\Contracts\HasDefaultTenant;
@@ -21,6 +22,7 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasDefaul
     use HasApiTokens;
     use HasCompanies;
     use HasFactory;
+    use EnsureCompany;
     use HasProfilePhoto;
     use Notifiable;
 

@@ -7,6 +7,7 @@ use App\Models\Employee;
 use App\Models\Payroll;
 use App\Models\Project;
 use App\Models\PTO;
+use App\Models\Scopes\EnsureCompany;
 use App\Models\Task;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;
@@ -21,7 +22,7 @@ class CompanyStatsOverview3 extends BaseWidget
                 ->description('Total number of companies')
                 ->color('primary'),
 
-            Card::make('Total Users', User::count())
+            Card::make('Total Users', User::query()->count())
                 ->description('Total number of users')
                 ->color('success'),
 
