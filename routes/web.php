@@ -29,9 +29,3 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/refund', 'refund')->name('refund');
     Route::get('/support', 'support')->name('support');
 });
-
-
-//Route [filament.admin.pages.dashboard] not defined.
-Route::get('/admin/dashboard', function () {
-    return redirect('filament.admin.pages.dashboard');
-})->name('filament.admin.pages.dashboard');

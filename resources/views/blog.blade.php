@@ -229,4 +229,37 @@
     </div>
   </section>
   <!-- ====== Blog End ====== -->
+
+  <!-- ====== XML News Feed Start ====== -->
+  <section class="ud-blog-grids">
+    <div class="container">
+      <div class="row mb-5">
+        <div class="col-lg-12">
+          <div class="ud-section-title text-center mx-auto">
+            <h2>XML News Feed</h2>
+            <p>
+              Real-time news pulled directly from XML/RSS feeds
+            </p>
+
+            <!-- XML Feed Selection -->
+            <div class="xml-feed-selector my-4">
+              <div class="btn-group" role="group">
+                @foreach($xmlFeeds as $key => $url)
+                  <a href="#"
+                     onclick="Livewire.dispatch('switchFeed', { url: '{{ $url }}' }); return false;"
+                     class="btn {{ $key == $defaultFeed ? 'btn-primary' : 'btn-outline-primary' }}">
+                    {{ ucfirst($key) }} News
+                  </a>
+                @endforeach
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Livewire XML Feed Component -->
+      @livewire('xml-news-feed', ['url' => $xmlFeeds[$defaultFeed]])
+    </div>
+  </section>
+  <!-- ====== XML News Feed End ====== -->
 </x-layout>

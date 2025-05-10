@@ -35,7 +35,17 @@ class PageController extends Controller
      */
     public function blog()
     {
-        return view('blog');
+        // Define XML feed URLs that can be used
+        $xmlFeeds = [
+            'nasa' => 'https://www.nasa.gov/rss/dyn/breaking_news.rss',
+            'tech' => 'https://feeds.feedburner.com/TechCrunch/',
+            'world' => 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
+        ];
+
+        return view('blog', [
+            'xmlFeeds' => $xmlFeeds,
+            'defaultFeed' => 'nasa'
+        ]);
     }
 
     /**
