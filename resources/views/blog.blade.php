@@ -240,25 +240,12 @@
             <p>
               Real-time news pulled directly from XML/RSS feeds
             </p>
-
-            <!-- XML Feed Selection -->
-            <div class="xml-feed-selector my-4">
-              <div class="btn-group" role="group">
-                @foreach($xmlFeeds as $key => $url)
-                  <a href="#"
-                     onclick="Livewire.dispatch('switchFeed', { url: '{{ $url }}' }); return false;"
-                     class="btn {{ $key == $defaultFeed ? 'btn-primary' : 'btn-outline-primary' }}">
-                    {{ ucfirst($key) }} News
-                  </a>
-                @endforeach
-              </div>
-            </div>
           </div>
         </div>
       </div>
 
       <!-- Livewire XML Feed Component -->
-      @livewire('xml-news-feed', ['url' => $xmlFeeds[$defaultFeed]])
+      @livewire('xml-news-feed', ['url' => 'https://www.nasa.gov/rss/dyn/breaking_news.rss'])
     </div>
   </section>
   <!-- ====== XML News Feed End ====== -->

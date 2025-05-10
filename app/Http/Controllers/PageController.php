@@ -35,17 +35,7 @@ class PageController extends Controller
      */
     public function blog()
     {
-        // Define XML feed URLs that can be used
-        $xmlFeeds = [
-            'nasa' => 'https://www.nasa.gov/rss/dyn/breaking_news.rss',
-            'tech' => 'https://feeds.feedburner.com/TechCrunch/',
-            'world' => 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
-        ];
-
-        return view('blog', [
-            'xmlFeeds' => $xmlFeeds,
-            'defaultFeed' => 'nasa'
-        ]);
+        return view('blog');
     }
 
     /**
@@ -142,5 +132,13 @@ class PageController extends Controller
     public function support()
     {
         return view('support');
+    }
+
+    /**
+     * Display the XML tools page.
+     */
+    public function xmlTools()
+    {
+        return view('xml-tools');
     }
 }

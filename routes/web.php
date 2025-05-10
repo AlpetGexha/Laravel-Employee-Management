@@ -28,4 +28,5 @@ Route::controller(PageController::class)->group(function () {
     Route::get('/terms', 'terms')->name('terms');
     Route::get('/refund', 'refund')->name('refund');
     Route::get('/support', 'support')->name('support');
+    Route::get('/xml-tools', 'xmlTools')->name('xml-tools');
 });

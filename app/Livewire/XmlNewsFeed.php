@@ -12,7 +12,12 @@ class XmlNewsFeed extends Component
     public $error = null;
     public $feedUrl = 'https://www.nasa.gov/rss/dyn/breaking_news.rss'; // Default NASA feed as example
 
-    protected $listeners = ['switchFeed' => 'switchFeed'];
+    // This method will be called directly from the view
+    public function changeFeed($url)
+    {
+        $this->feedUrl = $url;
+        $this->fetchFeed();
+    }
 
     public function mount($url = null)
     {
@@ -21,14 +26,6 @@ class XmlNewsFeed extends Component
         }
 
         $this->fetchFeed();
-    }
-
-    public function switchFeed($data)
-    {
-        if (isset($data['url'])) {
-            $this->feedUrl = $data['url'];
-            $this->fetchFeed();
-        }
     }
       public function fetchFeed()
     {
