@@ -11,7 +11,9 @@ class SalesChart extends LineChartWidget
 
     protected function getData(): array
     {
-        $sales = Sale::selectRaw('DATE(created_at) as date, SUM(total_price) as total')
+        $sales = Sale::query()
+            ->where('company_id', auth()->user()->current_company_id)
+            ->selectRaw('DATE(created_at) as date, SUM(total_price) as total')
             ->groupBy('date')
             ->orderBy('date')
             ->get();

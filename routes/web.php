@@ -33,5 +33,5 @@ Route::controller(PageController::class)->group(function () {
 
 //Route [filament.admin.pages.dashboard] not defined.
 Route::get('/admin/dashboard', function () {
-    return redirect('');
+    return redirect('filament.admin.pages.dashboard');
 })->name('filament.admin.pages.dashboard');

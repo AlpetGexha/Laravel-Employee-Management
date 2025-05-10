@@ -43,14 +43,14 @@
 
                     <div class="navbar-btn d-none d-sm-inline-block">
                         @guest
-                            <a href="{{ route('filament.admin.auth.login') }}" class="ud-main-btn ud-login-btn">
+                            <a href="{{ route('filament.company.auth.login') }}" class="ud-main-btn ud-login-btn">
                                 Sign In
                             </a>
-                            <a class="ud-main-btn ud-white-btn" href="{{ route('filament.admin.auth.register') }}">
+                            <a class="ud-main-btn ud-white-btn" href="{{ route('filament.company.auth.register') }}">
                                 Sign Up
                             </a>
                         @else
-                            <a class="ud-main-btn ud-white-btn" href="{{ route('filament.admin.auth.login') }}">
+                            <a class="ud-main-btn ud-white-btn" href="{{ route('filament.company.pages.dashboard') }}">
                                 Dashboard
                             </a>
                         @endguest

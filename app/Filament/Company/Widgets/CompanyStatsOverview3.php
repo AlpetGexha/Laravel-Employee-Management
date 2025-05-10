@@ -26,11 +26,11 @@ class CompanyStatsOverview3 extends BaseWidget
                 ->description('Total number of users')
                 ->color('success'),
 
-            Card::make('Total Employees', Employee::count())
+            Card::make('Total Employees', Employee::where('company_id', auth()->user()->current_company_id)->count())
                 ->description('Total number of employees')
                 ->color('info'),
 
-            Card::make('Total Paychecks', Payroll::count())
+            Card::make('Total Paychecks', Payroll::where('company_id', auth()->user()->current_company_id)->count())
                 ->description('Total number of paychecks issued')
                 ->color('warning'),
 
@@ -42,11 +42,11 @@ class CompanyStatsOverview3 extends BaseWidget
                 ->description('PTO requests for next month')
                 ->color('secondary'),
 
-            Card::make('Projects', Project::count())
+            Card::make('Projects', Project::where('company_id', auth()->user()->current_company_id)->count())
                 ->description('Total number of projects')
                 ->color('primary'),
 
-            Card::make('Tasks', Task::count())
+            Card::make('Tasks', Task::where('company_id', auth()->user()->current_company_id)->count())
                 ->description('Total number of tasks')
                 ->color('success'),
         ];
