@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\PTO as EnumsPTO;
 use App\Traits\EnsureCompany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -36,6 +37,7 @@ class PTO extends Model
         'id' => 'integer',
         'from_date' => 'datetime',
         'to_date' => 'datetime',
+        'is_approved' => EnumsPTO::class
     ];
 
     public function company(): BelongsTo

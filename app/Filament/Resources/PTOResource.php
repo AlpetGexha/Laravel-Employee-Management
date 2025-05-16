@@ -28,9 +28,7 @@ class PTOResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('company.name')
-                    ->numeric()
-                    ->sortable(),
+
                 Tables\Columns\TextColumn::make('employee.first_name')
                     ->numeric()
                     ->sortable(),
@@ -47,6 +45,7 @@ class PTOResource extends Resource
                 Tables\Columns\TextColumn::make('reason')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('is_approved')
+                    ->badge()
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -63,7 +62,7 @@ class PTOResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 ActionsAction::make('status')
-                    ->action(fn (array $data, PTO $record) => $record->update(['is_approved' => $data['status']]))
+                    ->action(fn(array $data, PTO $record) => $record->update(['is_approved' => $data['status']]))
                     ->form([
                         Select::make('status')
                             ->options([
@@ -85,7 +84,7 @@ class PTOResource extends Resource
         return $form
             ->schema([
                 Forms\Components\Select::make('employee_id')
-                    ->relationship('employees', 'id')
+                    ->relationship('employee', 'id')
                     ->columnSpanFull()
                     ->required(),
                 Forms\Components\DateTimePicker::make('from_date')
@@ -112,7 +111,7 @@ class PTOResource extends Resource
     {
         return [
             'index' => Pages\ListPTOS::route('/'),
-            'create' => Pages\CreatePTO::route('/create'),
+            // 'create' => Pages\CreatePTO::route('/create'),
             'edit' => Pages\EditPTO::route('/{record}/edit'),
         ];
     }
