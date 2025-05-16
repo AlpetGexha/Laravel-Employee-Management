@@ -18,13 +18,13 @@ class CompanyStatsOverview3 extends BaseWidget
     protected function getCards(): array
     {
         return [
-            Card::make('Total Companies', Company::count())
-                ->description('Total number of companies')
-                ->color('primary'),
+            // Card::make('Total Companies', Company::count())
+            //     ->description('Total number of companies')
+            //     ->color('primary'),
 
-            Card::make('Total Users', User::query()->count())
-                ->description('Total number of users')
-                ->color('success'),
+            // Card::make('Total Users', User::query()->count())
+            //     ->description('Total number of users')
+            //     ->color('success'),
 
             Card::make('Total Employees', Employee::where('company_id', auth()->user()->current_company_id)->count())
                 ->description('Total number of employees')

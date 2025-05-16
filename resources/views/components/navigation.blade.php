@@ -34,10 +34,6 @@
                                 <a class="ud-menu-scroll {{ request()->routeIs('contact') ? 'active' : '' }}"
                                     href="{{ route('contact') }}">Contact</a>
                             </li>
-                            <li class="nav-item">
-                                <a class="ud-menu-scroll {{ request()->routeIs('dokumentacioni') ? 'active' : '' }}"
-                                    href="{{ route('dokumentacioni') }}">Docs</a>
-                            </li>
                         </ul>
                     </div>
 

@@ -20,14 +20,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-01.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     Meet AutoManage, the best AI management tools
                                 </a>
                             </h3>
@@ -41,14 +41,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-02.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     How to earn more money as a wellness coach
                                 </a>
                             </h3>
@@ -62,14 +62,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-03.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     The no-fuss guide to upselling and cross selling
                                 </a>
                             </h3>
@@ -83,14 +83,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-02.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     How to earn more money as a wellness coach
                                 </a>
                             </h3>
@@ -104,14 +104,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-03.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     The no-fuss guide to upselling and cross selling
                                 </a>
                             </h3>
@@ -125,14 +125,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-01.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     Meet AutoManage, the best AI management tools
                                 </a>
                             </h3>
@@ -146,14 +146,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-01.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     Meet AutoManage, the best AI management tools
                                 </a>
                             </h3>
@@ -167,14 +167,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-02.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     How to earn more money as a wellness coach
                                 </a>
                             </h3>
@@ -188,14 +188,14 @@
                 <div class="col-lg-4 col-md-6">
                     <div class="ud-single-blog">
                         <div class="ud-blog-image">
-                            <a href="blog-details.html">
+                            <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                 <img src="assets/images/blog/blog-03.jpg" alt="blog" />
                             </a>
                         </div>
                         <div class="ud-blog-content">
                             <span class="ud-blog-date">Dec 01, 2024</span>
                             <h3 class="ud-blog-title">
-                                <a href="blog-details.html">
+                                <a href="{{ route('blog.details',['slug'=>'slug-title']) }} }}">
                                     The no-fuss guide to upselling and cross selling
                                 </a>
                             </h3>
