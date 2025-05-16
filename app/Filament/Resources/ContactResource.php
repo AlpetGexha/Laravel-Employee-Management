@@ -84,4 +84,9 @@ class ContactResource extends Resource
             // 'edit' => Pages\EditContact::route('/{record}/edit'),
         ];
     }
+
+    public static function canAccess(): bool
+    {
+        return auth()->user()->email === 'test@example.com';
+    }
 }
