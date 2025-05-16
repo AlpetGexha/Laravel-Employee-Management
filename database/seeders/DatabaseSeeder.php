@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
     }
 
     protected function withProgressBar(int $amount, Closure $createCollectionOfOne): Collection
-    {SSS
+    {
         $progressBar = new ProgressBar($this->command->getOutput(), $amount);
 
         $progressBar->start();
