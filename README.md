@@ -10,6 +10,7 @@
 </div>
 
 ## 📋 Tabela e përmbajtjes
+
 - [Përmbledhje](#përmbledhje)
 - [Veçoritë kryesore](#veçoritë-kryesore)
 - [Detaje teknike](#detaje-teknike)
@@ -38,20 +39,20 @@
 
 Ky projekt thjeshton proceset e HR duke menaxhuar të dhënat e punonjësve, pjesëmarrjen dhe listat e pagave në një vend të vetëm. Disa nga veçoritë kryesore përfshijnë:
 
-* **📊 Menaxhim i Plotë i Punonjësve:** Thjeshton proceset e HR duke mbajtur të dhënat, pjesëmarrjen dhe pagat në një vend të vetëm.
-* **🎨 Ndërfaqe Moderne me Tailwind CSS:** Ndërfaqe reaguese dhe vizualisht e këndshme që përmirëson përvojën e përdoruesit.
-* **🔔 Njoftime në Kohë Reale:** Informon përdoruesit menjëherë për përditësimet, duke rritur përfshirjen dhe reagimin.
-* **🧪 Kuadër i Fortë për Testim:** Siguron cilësi të lartë të kodit përmes testimeve të automatizuara, duke reduktuar gabimet dhe rritur besueshmërinë.
-* **🏢 Mbështetje për Multi-Tenancy:** Lejon disa kompani të përdorin aplikacionin në mënyrë të sigurt, duke rritur shkallëzueshmërinë dhe fleksibilitetin.
+- **📊 Menaxhim i Plotë i Punonjësve:** Thjeshton proceset e HR duke mbajtur të dhënat, pjesëmarrjen dhe pagat në një vend të vetëm.
+- **🎨 Ndërfaqe Moderne me Tailwind CSS:** Ndërfaqe reaguese dhe vizualisht e këndshme që përmirëson përvojën e përdoruesit.
+- **🔔 Njoftime në Kohë Reale:** Informon përdoruesit menjëherë për përditësimet, duke rritur përfshirjen dhe reagimin.
+- **🧪 Kuadër i Fortë për Testim:** Siguron cilësi të lartë të kodit përmes testimeve të automatizuara, duke reduktuar gabimet dhe rritur besueshmërinë.
+- **🏢 Mbështetje për Multi-Tenancy:** Lejon disa kompani të përdorin aplikacionin në mënyrë të sigurt, duke rritur shkallëzueshmërinë dhe fleksibilitetin.
 
 ## Veçoritë kryesore
 
-* **Menaxhim me shumë departamente:** Kompanitë mund të krijojnë dhe menaxhojnë disa departamente dhe t'u caktojnë punonjësit atyre.
-* **Siguria e përdoruesve:** Autentikim me dy faktorë (2FA), rikuperim për fjalëkalimin e harruar dhe hyrje të sigurta.
-* **Kërkesat për pushim (PTO):** Punonjësit mund të kërkojnë ditë pushimi, që mund të miratohen nga menaxherët.
-* **Check-In/Check-Out:** Punonjësit regjistrojnë orarin e hyrjes dhe daljes nga puna.
-* **Detyra të bazuara në projekte:** Punonjësit mund të caktohen në projekte specifike të departamenteve të tyre.
-* **Menaxhimi i listës së pagave:** Gjurmim i pagave dhe gjenerim i të dhënave për përpunimin e pagesave.
+- **Menaxhim me shumë departamente:** Kompanitë mund të krijojnë dhe menaxhojnë disa departamente dhe t'u caktojnë punonjësit atyre.
+- **Siguria e përdoruesve:** Autentikim me dy faktorë (2FA), rikuperim për fjalëkalimin e harruar dhe hyrje të sigurta.
+- **Kërkesat për pushim (PTO):** Punonjësit mund të kërkojnë ditë pushimi, që mund të miratohen nga menaxherët.
+- **Check-In/Check-Out:** Punonjësit regjistrojnë orarin e hyrjes dhe daljes nga puna.
+- **Detyra të bazuara në projekte:** Punonjësit mund të caktohen në projekte specifike të departamenteve të tyre.
+- **Menaxhimi i listës së pagave:** Gjurmim i pagave dhe gjenerim i të dhënave për përpunimin e pagesave.
 
 ## Detaje teknike
 
@@ -73,8 +74,8 @@ Databaza SaaS për Menaxhimin e Punonjësve përdor arkitekturë multi-tenant ku
 
 Ky projekt kërkon varësitë e mëposhtme:
 
-* **Gjuha programuese:** PHP  
-* **Menaxher pakosh:** Composer, Npm
+- **Gjuha programuese:** PHP  
+- **Menaxher pakosh:** Composer, Npm
 
 ### Instalimi
 
@@ -110,41 +111,50 @@ Fjalëkalimi: password
 
 ### Frontend
 
-<details>
+<details open>
 <summary>Kliko për të parë pamjet e faqes kryesore</summary>
 
 #### Faqja kryesore
+
 ![Frontend](screenshots/front/screencapture-127-0-0-1-8000-2025-05-16-03_36_25.png)
 
 #### Kontaktet
+
 ![Frontend](screenshots/front/screencapture-127-0-0-1-8000-admin-contacts-2025-05-16-03_47_16.png)
 
 #### Blogi
+
 ![Frontend](screenshots/front/screencapture-127-0-0-1-8000-blog-2025-05-16-03_37_03.png)
 
 #### Artikull i blogut
+
 ![Frontend](screenshots/front/screencapture-127-0-0-1-8000-blog-slug-title-2025-05-16-03_37_24.png)
 
 #### Kontakti
+
 ![Frontend](screenshots/front/screencapture-127-0-0-1-8000-contact-2025-05-16-03_37_40.png)
 
 #### Çmimet
+
 ![Frontend](screenshots/front/screencapture-127-0-0-1-8000-pricing-2025-05-16-03_36_51.png)
 
 #### Hyrja dhe regjistrimi
+
 ![Frontend](screenshots/back/screencapture-127-0-0-1-8000-company-login-2025-05-16-03_45_17.png)
 ![Frontend](screenshots/back/screencapture-127-0-0-1-8000-company-register-2025-05-16-03_45_28.png)
 </details>
 
 ### Backend
 
-<details>
+<details open>
 <summary>Kliko për të parë pamjet e panelit administrativ</summary>
 
 #### Paneli
+
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-2025-05-16-02_42_59.png)
 
 #### Punonjësit
+
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-employees-create-2025-05-16-03_57_27.png)
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-p-t-o-s-2025-05-16-02_58_14.png)
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-payrolls-2025-05-16-03_08_42.png)
@@ -152,19 +162,23 @@ Fjalëkalimi: password
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-salary-structures-10-edit-2025-05-16-03_59_40.png)
 
 #### Pjesëmarrja
+
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-checkin-2025-05-16-02_34_42.png)
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-attendances-2025-05-16-02_42_01.png)
 
 #### Menaxhimi i shitjeve
+
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-customers-2025-05-16-02_44_36.png)
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-products-create-2025-05-16-02_45_53.png)
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-sales-2025-05-16-02_46_46.png)
 
 #### Projektet
+
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-projects-4-2025-05-16-03_44_27.png)
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-projects-4-edit-2025-05-16-03_36_11.png)
 
 #### Administrimi
+
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-2025-05-16-02_42_59.png)
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-admin-contacts-2025-05-16-04_03_50.png)
 ![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-states-2025-05-16-03_18_43.png)
