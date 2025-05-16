@@ -37,7 +37,7 @@ class RFIDResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('employee.id')
+                Tables\Columns\TextColumn::make('employee.first_name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('code')
