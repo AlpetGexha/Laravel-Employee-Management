@@ -21,33 +21,29 @@ class AttendancesResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
-                    ->required(),
-                Forms\Components\TextInput::make('r_f_i_d_id')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\DateTimePicker::make('checked_in_at')
-                    ->required(),
-                Forms\Components\DateTimePicker::make('checked_out_at'),
-                Forms\Components\TextInput::make('late')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('overtime')
-                    ->maxLength(255)
-                    ->default(null),
-            ]);
+            ->schema(
+                [
+                    Forms\Components\Select::make('employee_id')
+                        ->relationship('employee', 'id')
+                        ->required(),
+                    Forms\Components\DateTimePicker::make('checked_in_at')
+                        ->required(),
+                    Forms\Components\DateTimePicker::make('checked_out_at'),
+                    Forms\Components\TextInput::make('late')
+                        ->maxLength(255)
+                        ->default(null),
+                    Forms\Components\TextInput::make('overtime')
+                        ->maxLength(255)
+                        ->default(null),
+                ]
+            );
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('company.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('r_f_i_d_id')
+                Tables\Columns\TextColumn::make('employee.first_name')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('checked_in_at')
