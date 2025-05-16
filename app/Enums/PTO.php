@@ -2,11 +2,13 @@
 
 namespace App\Enums;
 
-enum PTO: string
+use Filament\Support\Contracts\HasColor;
+
+enum PTO: string implements HasColor
 {
-    case Pending = 'pending';
-    case Approved = 'approved';
-    case Rejected = 'rejected';
+    case Pending = 'Pending';
+    case Approved = 'Approved';
+    case Rejected = 'Rejected';
 
     public static function toArray(): array
     {
@@ -15,5 +17,14 @@ enum PTO: string
             self::Approved->value => 'Approved',
             self::Rejected->value => 'Rejected',
         ];
+    }
+
+    public function getColor(): string
+    {
+        return match ($this) {
+            self::Pending => 'primary',
+            self::Approved => 'success',
+            self::Rejected => 'danger',
+        };
     }
 }
