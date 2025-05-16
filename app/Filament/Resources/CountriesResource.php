@@ -82,8 +82,8 @@ class CountriesResource extends Resource
     {
         return [
             'index' => Pages\ListCountries::route('/'),
-            'create' => Pages\CreateCountries::route('/create'),
-            'edit' => Pages\EditCountries::route('/{record}/edit'),
+            // 'create' => Pages\CreateCountries::route('/create'),
+            // 'edit' => Pages\EditCountries::route('/{record}/edit'),
         ];
     }
 }

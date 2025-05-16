@@ -88,8 +88,8 @@ class CitiesResource extends Resource
     {
         return [
             'index' => Pages\ListCities::route('/'),
-            'create' => Pages\CreateCities::route('/create'),
-            'edit' => Pages\EditCities::route('/{record}/edit'),
+            // 'create' => Pages\CreateCities::route('/create'),
+            // 'edit' => Pages\EditCities::route('/{record}/edit'),
         ];
     }
 }
