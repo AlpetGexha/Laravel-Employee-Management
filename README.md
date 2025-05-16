@@ -31,12 +31,12 @@ _Empower Your Workforce, Streamline Employee Management Effortlessly_
 Table of Contents
 -----------------
 
-*   [Overview](#overview)
-*   [Getting Started](#getting-started)
-    *   [Prerequisites](#prerequisites)
-    *   [Installation](#installation)
-    *   [Usage](#usage)
-    *   [Testing](#testing)
+* [Overview](#overview)
+* [Getting Started](#getting-started)
+  * [Prerequisites](#prerequisites)
+  * [Installation](#installation)
+  * [Usage](#usage)
+  * [Testing](#testing)
 
 * * *
 
@@ -49,11 +49,11 @@ Overview
 
 This project streamlines HR processes by managing employee data, attendance, and payroll in one place. The core features include:
 
-*   **📊 Comprehensive Employee Management:** Streamlines HR processes by managing employee data, attendance, and payroll in one place.
-*   **🎨 Modern UI with Tailwind CSS:** Provides a responsive and visually appealing interface, enhancing user experience.
-*   **🔔 Real-time Notifications:** Keeps users informed with instant updates, improving engagement and responsiveness.
-*   **🧪 Robust Testing Framework:** Ensures high code quality through automated testing, reducing bugs and improving reliability.
-*   **🏢 Multi-Tenancy Support:** Allows multiple companies to use the application securely, enhancing scalability and flexibility.
+* **📊 Comprehensive Employee Management:** Streamlines HR processes by managing employee data, attendance, and payroll in one place.
+* **🎨 Modern UI with Tailwind CSS:** Provides a responsive and visually appealing interface, enhancing user experience.
+* **🔔 Real-time Notifications:** Keeps users informed with instant updates, improving engagement and responsiveness.
+* **🧪 Robust Testing Framework:** Ensures high code quality through automated testing, reducing bugs and improving reliability.
+* **🏢 Multi-Tenancy Support:** Allows multiple companies to use the application securely, enhancing scalability and flexibility.
 
 * * *
 
@@ -64,25 +64,24 @@ Getting Started
 
 This project requires the following dependencies:
 
-*   **Programming Language:** PHP
-*   **Package Manager:** Composer, Npm
+* **Programming Language:** PHP
+* **Package Manager:** Composer, Npm
 
 ### Installation
 
 Build Laravel-Employee-Management from the source and intsall dependencies:
 
-1.  **Clone the repository:**
-    
+1. **Clone the repository:**
+
         ❯ git clone https://github.com/AlpetGexha/Laravel-Employee-Management
         
-    
-2.  **Navigate to the project directory:**
-    
+
+2. **Navigate to the project directory:**
+
         ❯ cd Laravel-Employee-Management
         
-    
-3.  **Install the dependencies:**
-    
+
+3. **Install the dependencies:**
 
 **Using [composer](https://www.php.net/):**
 
