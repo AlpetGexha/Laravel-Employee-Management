@@ -40,19 +40,19 @@ class DatabaseSeeder extends Seeder
 
         $this->command->info('Seedin Contries');
 
-        $this->withProgressBar(7, fn () => Countries::factory()->create());
+        $this->withProgressBar(3, fn () => Countries::factory()->create());
 
         $this->command->info('Seedin Cities');
-        $this->withProgressBar(3, fn () => Cities::factory()
+        $this->withProgressBar(2, fn () => Cities::factory()
             ->for(
                 States::factory()
                     ->for(Countries::factory())
             )
-            ->count(random_int(1, 10))
+            ->count(random_int(1, 4))
             ->create());
 
         $this->command->info('Employee');
-        $this->withProgressBar(10, fn () => Employee::factory()
+        $this->withProgressBar(3, fn () => Employee::factory()
             ->for(Countries::factory())
             ->for(States::factory()
                 ->for(Countries::factory()))
@@ -62,7 +62,7 @@ class DatabaseSeeder extends Seeder
                         ->for(Countries::factory())))
             ->for(Departments::factory())
             ->for(SalaryStructures::factory())
-            ->has(Payroll::factory()->count(random_int(1, 5)))
+            ->has(Payroll::factory()->count(random_int(1, 3)))
             ->create());
 
         $this->command->info('RFID');
@@ -85,7 +85,7 @@ class DatabaseSeeder extends Seeder
     }
 
     protected function withProgressBar(int $amount, Closure $createCollectionOfOne): Collection
-    {
+    {SSS
         $progressBar = new ProgressBar($this->command->getOutput(), $amount);
 
         $progressBar->start();
