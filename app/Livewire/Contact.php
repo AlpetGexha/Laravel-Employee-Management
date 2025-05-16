@@ -6,6 +6,7 @@ use App\Actions\CreateContactAction;
 use App\Http\Requests\CreateContactRequest;
 use App\Jobs\SendContactMailJob;
 use App\Models\Contact as ContactModel;
+use Exception;
 use Illuminate\Support\Facades\RateLimiter;
 use Livewire\Component;
 
@@ -19,11 +20,6 @@ class Contact extends Component
     public $error = '';
     public $attempts = 3;
 
-    protected function rules()
-    {
-        return (new CreateContactRequest())->rules();
-    }
-
     public function submit(CreateContactAction $action)
     {
         // Check rate limiting (3 contacts per hour)
@@ -31,8 +27,9 @@ class Contact extends Component
 
         if (RateLimiter::tooManyAttempts($key, $this->attempts)) {
             $seconds = RateLimiter::availableIn($key);
-            $this->error = "Too many contact attempts. Please try again in " .
-                ceil($seconds / 60) . " minutes.";
+            $this->error = 'Too many contact attempts. Please try again in ' .
+                ceil($seconds / 60) . ' minutes.';
+
             return;
         }
 
@@ -57,7 +54,7 @@ class Contact extends Component
             $this->reset(['name', 'email', 'phone', 'message']);
             $this->success = true;
             $this->error = '';
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             $this->error = 'Failed to send your message. Please try again.';
         }
     }
@@ -65,5 +62,10 @@ class Contact extends Component
     public function render()
     {
         return view('livewire.contact');
+    }
+
+    protected function rules()
+    {
+        return (new CreateContactRequest)->rules();
     }
 }

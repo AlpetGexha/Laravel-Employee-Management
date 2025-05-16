@@ -3,7 +3,6 @@
 namespace App\Providers\Filament;
 
 use App\Http\Middleware\ApplyTenantScopes;
-use App\Http\Middleware\EnsureCompany;
 use App\Models\Company;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\AuthenticateSession;
@@ -48,7 +47,6 @@ class CompanyPanelProvider extends PanelProvider
             ->pages([
                 Pages\Dashboard::class,
             ])
-
 
             ->discoverWidgets(in: app_path('Filament/Company/Widgets'), for: 'App\\Filament\\Company\\Widgets')
             ->widgets([

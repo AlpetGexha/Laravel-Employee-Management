@@ -3,6 +3,7 @@
 namespace App\Livewire;
 
 use App\Services\XmlParserService;
+use Exception;
 use Livewire\Component;
 
 class XmlNewsFeed extends Component
@@ -27,13 +28,14 @@ class XmlNewsFeed extends Component
 
         $this->fetchFeed();
     }
-      public function fetchFeed()
+
+    public function fetchFeed()
     {
         try {
             $this->loading = true;
 
             // Use the XmlParserService to fetch and parse the feed
-            $xmlParserService = new XmlParserService();
+            $xmlParserService = new XmlParserService;
             $parsedFeed = $xmlParserService->parseXmlFeed($this->feedUrl);
 
             // Set news items from parsed feed
@@ -41,8 +43,8 @@ class XmlNewsFeed extends Component
 
             $this->error = null;
 
-        } catch (\Exception $e) {
-            $this->error = "Error loading XML feed: " . $e->getMessage();
+        } catch (Exception $e) {
+            $this->error = 'Error loading XML feed: ' . $e->getMessage();
         } finally {
             $this->loading = false;
         }

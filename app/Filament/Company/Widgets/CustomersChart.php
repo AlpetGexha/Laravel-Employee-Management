@@ -13,8 +13,8 @@ class CustomersChart extends BarChartWidget
     protected function getData(): array
     {
         $customers = Customer::query()
-        ->where('company_id', auth()->user()->current_company_id)
-        ->selectRaw('strftime("%Y-%m", created_at) as month, COUNT(*) as count')
+            ->where('company_id', auth()->user()->current_company_id)
+            ->selectRaw('strftime("%Y-%m", created_at) as month, COUNT(*) as count')
             ->groupBy('month')
             ->orderBy('month')
             ->get()

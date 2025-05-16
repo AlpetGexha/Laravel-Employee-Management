@@ -1,14 +1,14 @@
 <div>
     <div class="ud-contact-form" id="contact-form">
         <form wire:submit.prevent="submit">
-            @if($success)
+            @if ($success)
                 <div class="alert alert-success mb-4" role="alert">
                     <strong>Success!</strong>
                     <p class="mb-0">Your message has been sent successfully. We'll get back to you soon.</p>
                 </div>
             @endif
 
-            @if($error)
+            @if ($error)
                 <div class="alert alert-danger mb-4" role="alert">
                     <strong>Error!</strong>
                     <p class="mb-0">{{ $error }}</p>

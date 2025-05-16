@@ -19,10 +19,10 @@ use Wallo\FilamentCompanies\HasProfilePhoto;
 
 class User extends Authenticatable implements FilamentUser, HasAvatar, HasDefaultTenant, HasTenants
 {
+    use EnsureCompany;
     use HasApiTokens;
     use HasCompanies;
     use HasFactory;
-    use EnsureCompany;
     use HasProfilePhoto;
     use Notifiable;
 

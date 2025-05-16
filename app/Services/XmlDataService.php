@@ -3,17 +3,19 @@
 namespace App\Services;
 
 use App\Models\Employee;
-use SimpleXMLElement;
+use DOMDocument;
+use Exception;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Storage;
-use DOMDocument;
+use Log;
+use SimpleXMLElement;
 
 class XmlDataService
 {
     /**
      * Export employees data to XML format
      *
-     * @param Collection|array $employees
+     * @param  Collection|array  $employees
      * @return string XML content
      */
     public function exportEmployeesToXml($employees): string
@@ -67,7 +69,6 @@ class XmlDataService
     /**
      * Import employees from XML string
      *
-     * @param string $xmlContent
      * @return array Imported employee IDs
      */
     public function importEmployeesFromXml(string $xmlContent): array
@@ -90,7 +91,7 @@ class XmlDataService
                 // Check if employee already exists
                 $employee = Employee::where('email', $employeeData['email'])->first();
 
-                if (!$employee) {
+                if (! $employee) {
                     // Create new employee
                     $employee = Employee::create($employeeData);
                 } else {
@@ -100,9 +101,9 @@ class XmlDataService
 
                 $importedIds[] = $employee->id;
             }
-        } catch (\Exception $e) {
+        } catch (Exception $e) {
             // Log error
-            \Log::error("XML Import error: " . $e->getMessage());
+            Log::error('XML Import error: ' . $e->getMessage());
             throw $e;
         }
 
@@ -112,7 +113,6 @@ class XmlDataService
     /**
      * Save XML export to storage
      *
-     * @param string $xmlContent
      * @return string File path
      */
     public function saveXmlExport(string $xmlContent): string
@@ -127,9 +127,6 @@ class XmlDataService
 
     /**
      * Generate sample XML for demo purposes
-     *
-     * @param int $count
-     * @return string
      */
     public function generateSampleXml(int $count = 5): string
     {
@@ -146,7 +143,7 @@ class XmlDataService
 
             $department = $employee->addChild('department');
             $department->addAttribute('id', rand(1, 5));
-            $department->addChild('name', "Department " . rand(1, 5));
+            $department->addChild('name', 'Department ' . rand(1, 5));
 
             $payrolls = $employee->addChild('payrolls');
 

@@ -37,7 +37,7 @@ class PTO extends Model
         'id' => 'integer',
         'from_date' => 'datetime',
         'to_date' => 'datetime',
-        'is_approved' => EnumsPTO::class
+        'is_approved' => EnumsPTO::class,
     ];
 
     public function company(): BelongsTo

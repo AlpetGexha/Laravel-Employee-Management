@@ -107,9 +107,10 @@ class EmployeeResource extends Resource
                                     ->label('State/Province')
                                     ->relationship('states', 'name', function ($query, $get) {
                                         $countryId = $get('countries_id');
-                                        if (!$countryId) {
+                                        if (! $countryId) {
                                             return $query->whereNull('id');
                                         }
+
                                         return $query->where('countries_id', $countryId);
                                     })
                                     ->searchable()
@@ -121,9 +122,10 @@ class EmployeeResource extends Resource
                                     ->label('City')
                                     ->relationship('cities', 'name', function ($query, $get) {
                                         $stateId = $get('states_id');
-                                        if (!$stateId) {
+                                        if (! $stateId) {
                                             return $query->whereNull('id');
                                         }
+
                                         return $query->where('states_id', $stateId);
                                     })
                                     ->searchable()

@@ -62,7 +62,7 @@ class PTOResource extends Resource
             ->actions([
                 Tables\Actions\EditAction::make(),
                 ActionsAction::make('status')
-                    ->action(fn(array $data, PTO $record) => $record->update(['is_approved' => $data['status']]))
+                    ->action(fn (array $data, PTO $record) => $record->update(['is_approved' => $data['status']]))
                     ->form([
                         Select::make('status')
                             ->options([

@@ -4,7 +4,7 @@
       <div class="col-lg-12">
         <div class="ud-banner-content">
           <h1>{{ $title ?? 'Welcome' }}</h1>
-          @if(isset($subtitle))
+          @if (isset($subtitle))
           <p>{{ $subtitle }}</p>
           @endif
         </div>

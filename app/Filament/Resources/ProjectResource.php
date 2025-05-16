@@ -7,24 +7,19 @@ use App\Filament\Resources\ProjectResource\Pages;
 use App\Filament\Resources\ProjectResource\RelationManagers\EmployeesRelationManager;
 use App\Filament\Resources\ProjectResource\RelationManagers\TasksRelationManager;
 use App\Models\Project;
+use Filament\Forms;
+use Filament\Forms\Form;
 use Filament\Infolists\Components\Actions\Action as InfoAction;
 use Filament\Infolists\Components\Grid;
 use Filament\Infolists\Components\Group;
-use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\Split;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
-use Filament\Forms;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use App\Models\Task;
-use Filament\Actions;
-
-use Filament\Resources\Pages\ViewRecord;
-use Illuminate\Support\HtmlString;
 use Filament\Tables\Table;
+use Illuminate\Support\HtmlString;
 
 class ProjectResource extends Resource
 {
@@ -53,7 +48,6 @@ class ProjectResource extends Resource
             ]);
     }
 
-
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -79,7 +73,7 @@ class ProjectResource extends Resource
                                     Group::make([
                                         TextEntry::make('status')
                                             ->badge()
-                                            ->color(fn(string $state): string => match ($state) {
+                                            ->color(fn (string $state): string => match ($state) {
                                                 'completed' => 'success',
                                                 'in progress' => 'warning',
                                                 'pending' => 'info',
@@ -89,14 +83,12 @@ class ProjectResource extends Resource
 
                                         TextEntry::make('time_left')
                                             ->label('Time Left')
-                                            ->formatStateUsing(fn($record): string =>
-                                            $record->time_left < 0
+                                            ->formatStateUsing(fn ($record): string => $record->time_left < 0
                                                 ? 'Overdue by ' . abs($record->time_left) . ' days'
                                                 : $record->time_left . ' days')
-                                            ->color(fn($record): string =>
-                                            $record->time_left < 0
+                                            ->color(fn ($record): string => $record->time_left < 0
                                                 ? 'danger'
-                                                : ($record->time_left < 5 ? 'warning' : 'success'))
+                                                : ($record->time_left < 5 ? 'warning' : 'success')),
                                     ]),
                                 ]),
                         ]),
@@ -115,7 +107,7 @@ class ProjectResource extends Resource
 
                                 TextEntry::make('employees_count')
                                     ->label('Team Size')
-                                    ->state(fn($record) => $record->employees->count())
+                                    ->state(fn ($record) => $record->employees->count())
                                     ->suffix(' members')
                                     ->icon('heroicon-o-user-group'),
                             ]),
@@ -127,11 +119,11 @@ class ProjectResource extends Resource
                     ->schema([
                         TextEntry::make('tasks_count')
                             ->label('Total Tasks')
-                            ->state(fn($record) => $record->tasks->count())
+                            ->state(fn ($record) => $record->tasks->count())
                             ->suffixAction(
                                 InfoAction::make('viewTasks')
                                     ->icon('heroicon-m-arrow-top-right-on-square')
-                                    ->url(fn($record) => ProjectResource::getUrl('edit', ['record' => $record]) . '#relation-manager-tasks-relation-manager-tab')
+                                    ->url(fn ($record) => ProjectResource::getUrl('edit', ['record' => $record]) . '#relation-manager-tasks-relation-manager-tab')
                             ),
 
                         TextEntry::make('tasks_status_summary')
@@ -142,7 +134,7 @@ class ProjectResource extends Resource
                                 $statusCounts = [
                                     'pending' => 0,
                                     'in progress' => 0,
-                                    'completed' => 0
+                                    'completed' => 0,
                                 ];
 
                                 foreach ($tasks as $task) {
@@ -162,7 +154,7 @@ class ProjectResource extends Resource
 
                                 foreach ($statusCounts as $status => $count) {
                                     $color = $colors[$status] ?? 'bg-gray-100 text-gray-800';
-                                    $html .= "<span class=\"px-2 py-1 rounded-lg text-xs font-medium {$color}\">{$count} " . ucwords($status) . "</span>";
+                                    $html .= "<span class=\"px-2 py-1 rounded-lg text-xs font-medium {$color}\">{$count} " . ucwords($status) . '</span>';
                                 }
 
                                 $html .= '</div>';
@@ -213,7 +205,7 @@ class ProjectResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->modifyQueryUsing(fn($query) => $query->withCount('employees', 'tasks'))
+            ->modifyQueryUsing(fn ($query) => $query->withCount('employees', 'tasks'))
             ->columns([
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
@@ -224,7 +216,7 @@ class ProjectResource extends Resource
                     ->dateTime()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('time_left')
-                    ->formatStateUsing(fn($record): string => $record->time_left < 0 ? 'Overdue' : $record->time_left . ' days')
+                    ->formatStateUsing(fn ($record): string => $record->time_left < 0 ? 'Overdue' : $record->time_left . ' days')
                     ->badge()
                     ->color(function ($record): string {
                         if ($record->time_left < 0) {
@@ -263,7 +255,7 @@ class ProjectResource extends Resource
                 Tables\Actions\DeleteAction::make(),
                 Tables\Actions\Action::make('status')
                     ->label('Status')
-                    ->fillForm(fn($record): array => [
+                    ->fillForm(fn ($record): array => [
                         'status' => $record->status,
                     ])
                     ->form([
@@ -281,7 +273,6 @@ class ProjectResource extends Resource
                 ]),
             ]);
     }
-
 
     public static function getRelations(): array
     {

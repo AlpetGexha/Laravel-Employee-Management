@@ -4,7 +4,7 @@ namespace App\Livewire;
 
 use App\Models\Employee;
 use App\Services\XmlDataService;
-use Illuminate\Support\Facades\Storage;
+use Exception;
 use Livewire\Component;
 use Livewire\WithFileUploads;
 
@@ -25,14 +25,14 @@ class XmlEmployeeExporter extends Component
     public function generateSampleXml()
     {
         try {
-            $xmlService = new XmlDataService();
+            $xmlService = new XmlDataService;
             $this->generatedXml = $xmlService->generateSampleXml($this->exportCount);
             $this->xmlContent = $this->generatedXml;
             $this->status = "Sample XML generated for {$this->exportCount} employees.";
             $this->isPreviewVisible = true;
             $this->error = '';
-        } catch (\Exception $e) {
-            $this->error = "Error generating XML: " . $e->getMessage();
+        } catch (Exception $e) {
+            $this->error = 'Error generating XML: ' . $e->getMessage();
             $this->status = '';
         }
     }
@@ -46,11 +46,12 @@ class XmlEmployeeExporter extends Component
                 ->get();
 
             if ($employees->isEmpty()) {
-                $this->error = "No employees found to export.";
+                $this->error = 'No employees found to export.';
+
                 return;
             }
 
-            $xmlService = new XmlDataService();
+            $xmlService = new XmlDataService;
             $this->generatedXml = $xmlService->exportEmployeesToXml($employees);
             $this->xmlContent = $this->generatedXml;
             $this->status = "Exported {$employees->count()} employees to XML.";
@@ -60,16 +61,17 @@ class XmlEmployeeExporter extends Component
             // Save XML to file
             $this->exportedFilePath = $xmlService->saveXmlExport($this->generatedXml);
 
-        } catch (\Exception $e) {
-            $this->error = "Error exporting employees: " . $e->getMessage();
+        } catch (Exception $e) {
+            $this->error = 'Error exporting employees: ' . $e->getMessage();
             $this->status = '';
         }
     }
 
     public function downloadXml()
     {
-        if (!$this->generatedXml) {
-            $this->error = "No XML content to download.";
+        if (! $this->generatedXml) {
+            $this->error = 'No XML content to download.';
+
             return null;
         }
 
@@ -80,7 +82,7 @@ class XmlEmployeeExporter extends Component
 
     public function togglePreview()
     {
-        $this->isPreviewVisible = !$this->isPreviewVisible;
+        $this->isPreviewVisible = ! $this->isPreviewVisible;
     }
 
     public function resetData()

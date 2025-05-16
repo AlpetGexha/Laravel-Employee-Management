@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use Exception;
 use SimpleXMLElement;
 
 class XmlParserService
@@ -9,10 +10,11 @@ class XmlParserService
     /**
      * Parse an XML feed URL and return structured data
      *
-     * @param string $url The XML feed URL
-     * @param int $limit Maximum number of items to return
+     * @param  string  $url  The XML feed URL
+     * @param  int  $limit  Maximum number of items to return
      * @return array Array of parsed news items and metadata
-     * @throws \Exception If feed cannot be fetched or parsed
+     *
+     * @throws Exception If feed cannot be fetched or parsed
      */
     public function parseXmlFeed(string $url, int $limit = 6): array
     {
@@ -20,7 +22,7 @@ class XmlParserService
         $xmlContent = @file_get_contents($url);
 
         if ($xmlContent === false) {
-            throw new \Exception("Could not fetch the XML feed from {$url}");
+            throw new Exception("Could not fetch the XML feed from {$url}");
         }
 
         // Create a SimpleXMLElement object
@@ -42,12 +44,12 @@ class XmlParserService
             $channel = $xml->channel;
 
             // Extract feed metadata
-            $feedInfo['title'] = (string)$channel->title;
-            $feedInfo['description'] = (string)$channel->description;
-            $feedInfo['link'] = (string)$channel->link;
+            $feedInfo['title'] = (string) $channel->title;
+            $feedInfo['description'] = (string) $channel->description;
+            $feedInfo['link'] = (string) $channel->link;
             $feedInfo['lastUpdated'] = isset($channel->lastBuildDate) ?
-                date('Y-m-d H:i:s', strtotime((string)$channel->lastBuildDate)) : '';
-            $feedInfo['language'] = (string)$channel->language;
+                date('Y-m-d H:i:s', strtotime((string) $channel->lastBuildDate)) : '';
+            $feedInfo['language'] = (string) $channel->language;
 
             // Extract items
             foreach ($channel->item as $item) {
@@ -60,20 +62,20 @@ class XmlParserService
             }
         }
         // Parse Atom format
-        else if (isset($xml->entry)) {
+        elseif (isset($xml->entry)) {
             // Extract feed metadata
-            $feedInfo['title'] = (string)$xml->title;
-            $feedInfo['description'] = (string)$xml->subtitle;
+            $feedInfo['title'] = (string) $xml->title;
+            $feedInfo['description'] = (string) $xml->subtitle;
 
             foreach ($xml->link as $link) {
-                if ((string)$link['rel'] === 'alternate') {
-                    $feedInfo['link'] = (string)$link['href'];
+                if ((string) $link['rel'] === 'alternate') {
+                    $feedInfo['link'] = (string) $link['href'];
                     break;
                 }
             }
 
             $feedInfo['lastUpdated'] = isset($xml->updated) ?
-                date('Y-m-d H:i:s', strtotime((string)$xml->updated)) : '';
+                date('Y-m-d H:i:s', strtotime((string) $xml->updated)) : '';
 
             // Extract items
             foreach ($xml->entry as $entry) {
@@ -88,7 +90,7 @@ class XmlParserService
 
         return [
             'feedInfo' => $feedInfo,
-            'items' => $newsItems
+            'items' => $newsItems,
         ];
     }
 
@@ -98,19 +100,19 @@ class XmlParserService
     private function parseRssItem($item): array
     {
         $newsItem = [
-            'title' => (string)$item->title,
-            'description' => (string)$item->description,
-            'content' => (string)($item->children('content', true)->encoded ?? ''),
-            'link' => (string)$item->link,
-            'pubDate' => date('M d, Y', strtotime((string)$item->pubDate)),
-            'pubDateRaw' => (string)$item->pubDate,
+            'title' => (string) $item->title,
+            'description' => (string) $item->description,
+            'content' => (string) ($item->children('content', true)->encoded ?? ''),
+            'link' => (string) $item->link,
+            'pubDate' => date('M d, Y', strtotime((string) $item->pubDate)),
+            'pubDateRaw' => (string) $item->pubDate,
             'image' => null,
             'categories' => [],
         ];
 
         // Try to extract image from content if available
         if (isset($item->enclosure) && isset($item->enclosure['url'])) {
-            $newsItem['image'] = (string)$item->enclosure['url'];
+            $newsItem['image'] = (string) $item->enclosure['url'];
         } elseif ($newsItem['content']) {
             $newsItem['image'] = $this->extractImageFromHtml($newsItem['content']);
         } elseif ($newsItem['description']) {
@@ -120,7 +122,7 @@ class XmlParserService
         // Extract categories
         if (isset($item->category)) {
             foreach ($item->category as $category) {
-                $newsItem['categories'][] = (string)$category;
+                $newsItem['categories'][] = (string) $category;
             }
         }
 
@@ -133,20 +135,20 @@ class XmlParserService
     private function parseAtomEntry($entry): array
     {
         $newsItem = [
-            'title' => (string)$entry->title,
-            'description' => (string)($entry->summary ?? ''),
-            'content' => (string)($entry->content ?? ''),
+            'title' => (string) $entry->title,
+            'description' => (string) ($entry->summary ?? ''),
+            'content' => (string) ($entry->content ?? ''),
             'link' => '',
-            'pubDate' => date('M d, Y', strtotime((string)$entry->published)),
-            'pubDateRaw' => (string)$entry->published,
+            'pubDate' => date('M d, Y', strtotime((string) $entry->published)),
+            'pubDateRaw' => (string) $entry->published,
             'image' => null,
             'categories' => [],
         ];
 
         // Get link
         foreach ($entry->link as $link) {
-            if ((string)$link['rel'] === 'alternate' || !isset($link['rel'])) {
-                $newsItem['link'] = (string)$link['href'];
+            if ((string) $link['rel'] === 'alternate' || ! isset($link['rel'])) {
+                $newsItem['link'] = (string) $link['href'];
                 break;
             }
         }
@@ -161,7 +163,7 @@ class XmlParserService
         // Extract categories
         if (isset($entry->category)) {
             foreach ($entry->category as $category) {
-                $newsItem['categories'][] = (string)$category['term'];
+                $newsItem['categories'][] = (string) $category['term'];
             }
         }
 
@@ -177,6 +179,7 @@ class XmlParserService
         if (preg_match($pattern, $html, $matches)) {
             return $matches[1];
         }
+
         return null;
     }
 }

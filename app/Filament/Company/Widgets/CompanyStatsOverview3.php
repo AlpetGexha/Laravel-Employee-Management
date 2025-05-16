@@ -7,7 +7,6 @@ use App\Models\Employee;
 use App\Models\Payroll;
 use App\Models\Project;
 use App\Models\PTO;
-use App\Models\Scopes\EnsureCompany;
 use App\Models\Task;
 use App\Models\User;
 use Filament\Widgets\StatsOverviewWidget as BaseWidget;

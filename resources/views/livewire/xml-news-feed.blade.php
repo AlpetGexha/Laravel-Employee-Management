@@ -26,7 +26,7 @@
     </div>
 
     <div class="row">
-        @if($loading)
+        @if ($loading)
             <div class="col-12 text-center mb-4">
                 <div class="spinner-border text-primary" role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -34,7 +34,7 @@
             </div>
         @endif
 
-        @if($error)
+        @if ($error)
             <div class="col-12 mb-4">
                 <div class="alert alert-danger">
                     {{ $error }}
@@ -49,12 +49,12 @@
             </button>
         </div>
 
-        @forelse($newsItems as $item)
+        @forelse ($newsItems as $item)
             <div class="col-lg-4 col-md-6">
                 <div class="ud-single-blog">
                     <div class="ud-blog-image">
                         <a href="{{ $item['link'] }}" target="_blank">
-                            @if($item['image'])
+                            @if ($item['image'])
                                 <img src="{{ $item['image'] }}" alt="{{ $item['title'] }}" />
                             @else
                                 <div class="placeholder-image bg-light d-flex align-items-center justify-content-center" style="height: 200px;">
@@ -73,9 +73,9 @@
                         <p class="ud-blog-desc">
                             {{ \Illuminate\Support\Str::limit(strip_tags($item['description']), 120) }}
                         </p>
-                        @if(!empty($item['categories']))
+                        @if (!empty($item['categories']))
                             <div class="small text-muted">
-                                @foreach($item['categories'] as $category)
+                                @foreach ($item['categories'] as $category)
                                     <span class="me-2">#{{ $category }}</span>
                                 @endforeach
                             </div>

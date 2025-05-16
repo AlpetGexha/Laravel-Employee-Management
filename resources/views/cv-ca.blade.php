@@ -87,7 +87,7 @@
   <!-- ====== Banner End ====== -->
 
   <style>
-    /* About Me 
+    /* About Me
   ---------------------*/
     .about-text h3 {
       font-size: 45px;
