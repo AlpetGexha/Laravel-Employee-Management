@@ -13,7 +13,8 @@
                     Do you want to check out?
                 </p>
                 <x-filament::button wire:click="confirmCheckout">{{ __('Confirm') }}</x-filament::button>
-                <x-filament::button wire:click="$set('confirmingCheckout', false)">{{ __('Cancel') }}</x-filament::button>
+                <x-filament::button
+                    wire:click="$set('confirmingCheckout', false)">{{ __('Cancel') }}</x-filament::button>
             </div>
         @endif
     </x-filament-panels::form>
