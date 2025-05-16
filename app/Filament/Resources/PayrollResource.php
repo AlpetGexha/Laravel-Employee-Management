@@ -22,29 +22,81 @@ class PayrollResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('employee_id')
-                    ->relationship('employee', 'id')
-                    ->required(),
-                Forms\Components\Select::make('salary_structures_id')
-                    ->relationship('salaryStructures', 'id')
-                    ->required(),
-                Forms\Components\TextInput::make('deduction')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('total_payable')
-                    ->required()
-                    ->numeric(),
-                Forms\Components\TextInput::make('reason')
-                    ->maxLength(255)
-                    ->default(null),
-                Forms\Components\TextInput::make('year')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('month')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('date')
-                    ->required(),
+                // Employee & Salary Section
+                Forms\Components\Section::make('Employee & Salary Information')
+                    ->description('Select employee and salary structure')
+                    ->icon('heroicon-o-user')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Grid::make()
+                            ->columns(2)
+                            ->schema([
+                                Forms\Components\Select::make('employee_id')
+                                    ->label('Employee')
+                                    ->relationship('employee', 'id')
+                                    ->required(),
+
+                                Forms\Components\Select::make('salary_structures_id')
+                                    ->label('Salary Structure')
+                                    ->relationship('salaryStructures', 'id')
+                                    ->required(),
+                            ]),
+                    ]),
+
+                // Payment Information Section
+                Forms\Components\Section::make('Payment Information')
+                    ->description('Enter payment details')
+                    ->icon('heroicon-o-banknotes')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Grid::make()
+                            ->columns(2)
+                            ->schema([
+                                Forms\Components\TextInput::make('total_payable')
+                                    ->label('Total Payable Amount')
+                                    ->required()
+                                    ->numeric()
+                                    ->prefix('$'),
+
+                                Forms\Components\TextInput::make('deduction')
+                                    ->label('Deduction Amount')
+                                    ->required()
+                                    ->numeric()
+                                    ->prefix('$'),
+                            ]),
+
+                        Forms\Components\TextInput::make('reason')
+                            ->label('Reason for Deduction/Adjustment')
+                            ->placeholder('Enter reason for deduction or adjustment if any')
+                            ->maxLength(255)
+                            ->default(null)
+                            ->columnSpanFull(),
+                    ]),
+
+                // Payment Period Section
+                Forms\Components\Section::make('Payment Period')
+                    ->description('Set payment date and period')
+                    ->icon('heroicon-o-calendar')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Grid::make()
+                            ->columns(3)
+                            ->schema([
+                                Forms\Components\TextInput::make('year')
+                                    ->label('Year')
+                                    ->required()
+                                    ->maxLength(255),
+
+                                Forms\Components\TextInput::make('month')
+                                    ->label('Month')
+                                    ->required()
+                                    ->maxLength(255),
+
+                                Forms\Components\DateTimePicker::make('date')
+                                    ->label('Payment Date')
+                                    ->required(),
+                            ]),
+                    ]),
             ]);
     }
 
@@ -52,41 +104,77 @@ class PayrollResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('company.name')
-                    ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('salaryStructures.salary_class')
-                    ->numeric()
-                    ->sortable(),
+                // Employee Information
                 Tables\Columns\TextColumn::make('employee.first_name')
+                    ->label('Employee')
+                    ->icon('heroicon-o-user')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('deduction')
+
+                // Salary Structure
+                Tables\Columns\TextColumn::make('salaryStructures.salary_class')
+                    ->label('Salary Class')
+                    ->badge()
                     ->numeric()
                     ->sortable(),
+
+                // Financial Information
                 Tables\Columns\TextColumn::make('total_payable')
+                    ->label('Amount')
+                    ->prefix('$')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('reason')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('year')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('month')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('date')
-                    ->dateTime()
+
+                Tables\Columns\TextColumn::make('deduction')
+                    ->label('Deduction')
+                    ->prefix('$')
+                    ->numeric()
                     ->sortable(),
+
+                // Period Information
+                Tables\Columns\TextColumn::make('year')
+                    ->label('Year')
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('month')
+                    ->label('Month')
+                    ->searchable(),
+
+                Tables\Columns\TextColumn::make('date')
+                    ->label('Payment Date')
+                    ->date()
+                    ->sortable(),
+
+                // Additional Information
+                Tables\Columns\TextColumn::make('reason')
+                    ->label('Notes')
+                    ->limit(20)
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('created_at')
+                    ->label('Created')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+
                 Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Updated')
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('employee_id')
+                    ->relationship('employee', 'id')
+                    ->label('Employee'),
+
+                Tables\Filters\SelectFilter::make('year')
+                    ->options([
+                        '2023' => '2023',
+                        '2024' => '2024',
+                        '2025' => '2025',
+                    ])
+                    ->label('Year'),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
