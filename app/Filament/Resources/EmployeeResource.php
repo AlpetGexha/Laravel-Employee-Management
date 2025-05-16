@@ -24,55 +24,189 @@ class EmployeeResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\Select::make('company_id')
-                    ->relationship('company', 'name')
-                    ->required(),
-                Forms\Components\Select::make('countries_id')
-                    ->relationship('countries', 'name')
-                    ->required(),
-                Forms\Components\Select::make('states_id')
-                    ->relationship('states', 'name')
-                    ->required(),
-                Forms\Components\Select::make('cities_id')
-                    ->relationship('cities', 'name')
-                    ->required(),
-                Forms\Components\Select::make('departments_id')
-                    ->relationship('departments', 'name')
-                    ->required(),
-                Forms\Components\Select::make('designations_id')
-                    ->relationship('designations', 'name')
-                    ->default(null),
-                Forms\Components\Select::make('salary_structures_id')
-                    ->relationship('salaryStructures', 'id')
-                    ->default(null),
-                Forms\Components\TextInput::make('first_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('last_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('email')
-                    ->email()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('phone')
-                    ->tel()
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('personal_number')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('address')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\DateTimePicker::make('date_birth'),
-                Forms\Components\DateTimePicker::make('date_hired'),
-                Forms\Components\DateTimePicker::make('date_fired'),
-                Forms\Components\Toggle::make('is_active')
-                    ->required(),
-                Forms\Components\TextInput::make('status')
-                    ->maxLength(255)
-                    ->default(null),
+                // Personal Information Section
+                Forms\Components\Section::make('Personal Information')
+                    ->description('Enter the employee\'s personal details')
+                    ->icon('heroicon-o-user')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Grid::make()
+                            ->columns(2)
+                            ->schema([
+                                Forms\Components\TextInput::make('first_name')
+                                    ->label('First Name')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('John'),
+
+                                Forms\Components\TextInput::make('last_name')
+                                    ->label('Last Name')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('Doe'),
+                            ]),
+
+                        Forms\Components\Grid::make()
+                            ->columns(2)
+                            ->schema([
+                                Forms\Components\TextInput::make('email')
+                                    ->label('Email Address')
+                                    ->email()
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('john.doe@example.com'),
+
+                                Forms\Components\TextInput::make('phone')
+                                    ->label('Phone Number')
+                                    ->tel()
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('+1 (555) 123-4567'),
+                            ]),
+
+                        Forms\Components\Grid::make()
+                            ->columns(2)
+                            ->schema([
+                                Forms\Components\DateTimePicker::make('date_birth')
+                                    ->label('Date of Birth')
+                                    ->displayFormat('F j, Y')
+                                    ->placeholder('Select date of birth'),
+
+                                Forms\Components\TextInput::make('personal_number')
+                                    ->label('ID/Passport Number')
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->placeholder('A1234567B'),
+                            ]),
+                    ]),
+
+                // Address Information Section
+                Forms\Components\Section::make('Address Information')
+                    ->description('Enter the employee\'s location details')
+                    ->icon('heroicon-o-map-pin')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Textarea::make('address')
+                            ->label('Street Address')
+                            ->required()
+                            ->rows(2)
+                            ->placeholder('123 Main St, Apt 4B'),
+
+                        Forms\Components\Grid::make()
+                            ->columns(3)
+                            ->schema([
+                                Forms\Components\Select::make('countries_id')
+                                    ->label('Country')
+                                    ->relationship('countries', 'name')
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->reactive(),
+
+                                Forms\Components\Select::make('states_id')
+                                    ->label('State/Province')
+                                    ->relationship('states', 'name', function ($query, $get) {
+                                        $countryId = $get('countries_id');
+                                        if (!$countryId) {
+                                            return $query->whereNull('id');
+                                        }
+                                        return $query->where('countries_id', $countryId);
+                                    })
+                                    ->searchable()
+                                    ->preload()
+                                    ->required()
+                                    ->reactive(),
+
+                                Forms\Components\Select::make('cities_id')
+                                    ->label('City')
+                                    ->relationship('cities', 'name', function ($query, $get) {
+                                        $stateId = $get('states_id');
+                                        if (!$stateId) {
+                                            return $query->whereNull('id');
+                                        }
+                                        return $query->where('states_id', $stateId);
+                                    })
+                                    ->searchable()
+                                    ->preload()
+                                    ->required(),
+                            ]),
+                    ]),
+
+                // Employment Information Section
+                Forms\Components\Section::make('Employment Details')
+                    ->description('Enter job-related information')
+                    ->icon('heroicon-o-briefcase')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Grid::make()
+                            ->columns(2)
+                            ->schema([
+                                Forms\Components\Select::make('departments_id')
+                                    ->label('Department')
+                                    ->relationship('departments', 'name')
+                                    ->searchable()
+                                    ->preload()
+                                    ->required(),
+
+                                Forms\Components\Select::make('designations_id')
+                                    ->label('Job Title')
+                                    ->relationship('designations', 'name')
+                                    ->searchable()
+                                    ->preload(),
+                            ]),
+
+                        Forms\Components\Select::make('salary_structures_id')
+                            ->label('Salary Structure')
+                            ->relationship('salaryStructures', 'id')
+                            ->searchable()
+                            ->preload()
+                            ->placeholder('Select a salary structure'),
+
+                        Forms\Components\Card::make()
+                            ->schema([
+                                Forms\Components\Grid::make()
+                                    ->columns(2)
+                                    ->schema([
+                                        Forms\Components\DateTimePicker::make('date_hired')
+                                            ->label('Hire Date')
+                                            ->displayFormat('F j, Y')
+                                            ->placeholder('Select hire date'),
+
+                                        Forms\Components\DateTimePicker::make('date_fired')
+                                            ->label('Termination Date (if applicable)')
+                                            ->displayFormat('F j, Y')
+                                            ->placeholder('Select termination date'),
+                                    ]),
+                            ]),
+                    ]),
+
+                // Status Information Section
+                Forms\Components\Section::make('Status')
+                    ->description('Set employee\'s current status')
+                    ->icon('heroicon-o-check-circle')
+                    ->collapsible()
+                    ->schema([
+                        Forms\Components\Grid::make()
+                            ->columns(2)
+                            ->schema([
+                                Forms\Components\Toggle::make('is_active')
+                                    ->label('Active Employee')
+                                    ->helperText('Toggle to set employee as active or inactive')
+                                    ->required(),
+
+                                Forms\Components\Select::make('status')
+                                    ->label('Employment Status')
+                                    ->options([
+                                        'full-time' => 'Full-time',
+                                        'part-time' => 'Part-time',
+                                        'contract' => 'Contract',
+                                        'probation' => 'Probation',
+                                        'leave' => 'On Leave',
+                                        'terminated' => 'Terminated',
+                                    ])
+                                    ->default('full-time'),
+                            ]),
+                    ]),
             ]);
     }
 
