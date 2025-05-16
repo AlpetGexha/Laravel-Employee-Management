@@ -1,128 +1,157 @@
-# Employee-Management
+# Laravel-Employee-Management
 
-![EM](https://user-images.githubusercontent.com/50520333/199846282-977d19d7-d600-4911-a43f-a3b59fc1de9e.PNG)
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-2025-05-16-02_12_09.png)
 
-# Installation
+Përmbledhje
+-----------
 
-#### Update composer
+**Laravel-Menaxhimi-i-Punonjësve** është një mjet i fuqishëm i krijuar për të thjeshtuar dhe përmirësuar menaxhimin e punonjësve për organizata të të gjitha madhësive.
 
+**Pse Laravel-Menaxhimi-i-Punonjësve?**
+
+Ky projekt thjeshton proceset e HR duke menaxhuar të dhënat e punonjësve, pjesëmarrjen dhe listat e pagave në një vend të vetëm. Disa nga veçoritë kryesore përfshijnë:
+
+* **📊 Menaxhim i Plotë i Punonjësve:** Thjeshton proceset e HR duke mbajtur të dhënat, pjesëmarrjen dhe pagat në një vend të vetëm.
+
+* **🎨 Ndërfaqe Moderne me Tailwind CSS:** Ndërfaqe reaguese dhe vizualisht e këndshme që përmirëson përvojën e përdoruesit.
+* **🔔 Njoftime në Kohë Reale:** Informon përdoruesit menjëherë për përditësimet, duke rritur përfshirjen dhe reagimin.
+* **🧪 Kuadër i Fortë për Testim:** Siguron cilësi të lartë të kodit përmes testimeve të automatizuara, duke reduktuar gabimet dhe rritur besueshmërinë.
+* **🏢 Mbështetje për Multi-Tenancy:** Lejon disa kompani të përdorin aplikacionin në mënyrë të sigurt, duke rritur shkallëzueshmërinë dhe fleksibilitetin.
+
+---
+
+### Detaje
+
+Sistemi i Menaxhimit të Punonjësve është një platformë Software-as-a-Service (SaaS) me arkitekturë multi-tenant. U lejon përdoruesve të menaxhojnë kompani të shumta brenda një databaze të vetme të centralizuar. Çdo përdorues mund të kalojë dhe monitorojë disa kompani duke përdorur të njëjtën databazë. Dizajni garanton izolim të të dhënave, siguri dhe kontroll të lehtë të aksesit.
+
+Sistemi lejon përdoruesit të kryejnë detyra thelbësore për secilën kompani që ata menaxhojnë, si shtimi i punonjësve, caktimi i roleve, ndjekja e listës së pagave dhe vlerësimi i performancës. Me një databazë të unifikuar, reduktohet kompleksiteti i infrastrukturës dhe rritet efikasiteti i përdorimit të burimeve. Struktura e databazës është e përshtatshme për pothuajse çdo kategori kompanie.
+
+**Problemi:**  
+Menaxhimi i punonjësve në kompani të ndryshme me aplikacione të ndara është joefikas, i kushtueshëm dhe i prirur për gabime. Çdo kompani ka nevojë për hyrje, databaza dhe platforma të ndryshme, duke çuar në shpërndarje të të dhënave dhe rritje të kostove të mirëmbajtjes.
+
+**Zgjidhja:**  
+Databaza SaaS për Menaxhimin e Punonjësve përdor arkitekturë multi-tenant ku një databazë e vetme pret të dhënat për shumë kompani. Përdoruesit kanë akses të kufizuar vetëm në kompanitë e tyre dhe mund të kalojnë mes kompanive pa pasur nevojë për hyrje të shumta. Identifikuesit e tenants ndajnë të dhënat logjikisht dhe aplikojnë kontroll të aksesit të bazuar në role, duke ruajtur sigurinë. Ky konfigurim redukton kostot operacionale, thjeshton backup-et dhe rrit shkallëzueshmërinë e sistemit.
+
+**Veçori kryesore të sistemit përfshijnë:**
+
+* **Menaxhim me shumë departamente:** Kompanitë mund të krijojnë dhe menaxhojnë disa departamente dhe t’u caktojnë punonjësit atyre.
+* **Siguria e përdoruesve:** Autentikim me dy faktorë (2FA), rikuperim për fjalëkalimin e harruar dhe hyrje të sigurta.
+* **Kërkesat për pushim (PTO):** Punonjësit mund të kërkojnë ditë pushimi, që mund të miratohen nga menaxherët.
+* **Check-In/Check-Out:** Punonjësit regjistrojnë orarin e hyrjes dhe daljes nga puna.
+* **Detyra të bazuara në projekte:** Punonjësit mund të caktohen në projekte specifike të departamenteve të tyre.
+* **Menaxhimi i listës së pagave:** Gjurmim i pagave dhe gjenerim i të dhënave për përpunimin e pagesave.
+
+Si të Filloni
+--------------
+
+### Kërkesat Paraprake
+
+Ky projekt kërkon varësitë e mëposhtme:
+
+* **Gjuha programuese:** PHP  
+* **Menaxher pakosh:** Composer, Npm
+
+### Instalimi
+
+Ndërtoni Laravel-Menaxhimi-i-Punonjësve nga burimi dhe instaloni varësitë:
+
+1. **Klono depozitën:**
+
+```bash
+git clone https://github.com/AlpetGexha/Laravel-Employee-Management
+cd Laravel-Employee-Management
+composer install
+npm install
+.cp .env.example .env
+php artisan key:generate
+php artisan migrate 
+php artisan db:seed
 ```
-composer update
-cp .env.example .env
-php artisan migrate:fresh --seed
-php artisan shield:install
+
+start the server
+
+```bash
+composer run dev
 ```
 
-```
-Email: admin@admin.com
-PW   : admin
-```
+# Përdorust
 
-End Point employees API
-`URL/api/employees`
+<test@exmple.com>:password
 
-LARAVEL-EMPLOYEE-MANAGEMENT
-===========================
+## Screenshots
 
-_Empower Your Workforce, Streamline Employee Management Effortlessly_
+### Frontend
 
-* * *
+![Frontend](screenshots/front/screencapture-127-0-0-1-8000-2025-05-16-03_36_25.png)
 
-Table of Contents
------------------
+![Frontend](screenshots/front/screencapture-127-0-0-1-8000-admin-contacts-2025-05-16-03_47_16.png)
 
-* [Overview](#overview)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-  * [Usage](#usage)
-  * [Testing](#testing)
+![Frontend](screenshots/front/screencapture-127-0-0-1-8000-blog-2025-05-16-03_37_03.png)
 
-* * *
+![Frontend](screenshots/front/screencapture-127-0-0-1-8000-blog-slug-title-2025-05-16-03_37_24.png)
 
-Overview
---------
+![Frontend](screenshots/front/screencapture-127-0-0-1-8000-contact-2025-05-16-03_37_40.png)
 
-**Laravel-Employee-Management** is a powerful tool designed to simplify and enhance employee management for organizations of all sizes.
+![Frontend](screenshots/front/screencapture-127-0-0-1-8000-pricing-2025-05-16-03_36_51.png)
 
-**Why Laravel-Employee-Management?**
+![Frontend](screenshots/back/screencapture-127-0-0-1-8000-company-login-2025-05-16-03_45_17.png)
 
-This project streamlines HR processes by managing employee data, attendance, and payroll in one place. The core features include:
+![Frontend](screenshots/back/screencapture-127-0-0-1-8000-company-register-2025-05-16-03_45_28.png)
 
-* **📊 Comprehensive Employee Management:** Streamlines HR processes by managing employee data, attendance, and payroll in one place.
-* **🎨 Modern UI with Tailwind CSS:** Provides a responsive and visually appealing interface, enhancing user experience.
-* **🔔 Real-time Notifications:** Keeps users informed with instant updates, improving engagement and responsiveness.
-* **🧪 Robust Testing Framework:** Ensures high code quality through automated testing, reducing bugs and improving reliability.
-* **🏢 Multi-Tenancy Support:** Allows multiple companies to use the application securely, enhancing scalability and flexibility.
+### Backend
 
-* * *
+#### Pannel
 
-Getting Started
----------------
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-2025-05-16-02_42_59.png)
 
-### Prerequisites
+#### Employees
 
-This project requires the following dependencies:
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-employees-create-2025-05-16-03_57_27.png)
 
-* **Programming Language:** PHP
-* **Package Manager:** Composer, Npm
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-p-t-o-s-2025-05-16-02_58_14.png)
 
-### Installation
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-payrolls-2025-05-16-03_08_42.png)
 
-Build Laravel-Employee-Management from the source and intsall dependencies:
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-payrolls-create-2025-05-16-03_03_50.png)
 
-1. **Clone the repository:**
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-salary-structures-10-edit-2025-05-16-03_59_40.png)
 
-        ❯ git clone https://github.com/AlpetGexha/Laravel-Employee-Management
-        
+#### Checkin / Checkout
 
-2. **Navigate to the project directory:**
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-checkin-2025-05-16-02_34_42.png)
 
-        ❯ cd Laravel-Employee-Management
-        
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-attendances-2025-05-16-02_42_01.png)
 
-3. **Install the dependencies:**
+#### Sales Meanagement
 
-**Using [composer](https://www.php.net/):**
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-customers-2025-05-16-02_44_36.png)
 
-    ❯ composer install
-    
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-products-create-2025-05-16-02_45_53.png)
 
-**Using [npm](https://www.npmjs.com/):**
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-sales-2025-05-16-02_46_46.png)
 
-    ❯ npm install
-    
+#### Projects
 
-### Usage
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-projects-4-2025-05-16-03_44_27.png)
 
-Run the project with:
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-projects-4-edit-2025-05-16-03_36_11.png)
 
-**Using [composer](https://www.php.net/):**
+### Admin
 
-    php {entrypoint}
-    
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-2025-05-16-02_42_59.png)
 
-**Using [npm](https://www.npmjs.com/):**
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-admin-contacts-2025-05-16-04_03_50.png)
 
-    npm start
-    
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-states-2025-05-16-03_18_43.png)
 
-### Testing
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-cities-2025-05-16-03_19_02.png)
 
-Laravel-employee-management uses the {**test\_framework**} test framework. Run the test suite with:
+![Backend](screenshots/back/screencapture-127-0-0-1-8000-company-1-countries-2025-05-16-03_17_47.png)
 
-**Using [composer](https://www.php.net/):**
+### Punuar nga
 
-    vendor/bin/phpunit
-    
+* Alpet Gexha 220307141
+* Çlirim Allaqi 220307143
+* Enes Shehu 220307136
 
-**Using [npm](https://www.npmjs.com/):**
-
-    npm test
-    
-
-* * *
-
-[⬆ Return](#top)
-
-* * *
+[⬆ Kthehu lart](#top)
