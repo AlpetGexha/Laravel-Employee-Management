@@ -81,6 +81,11 @@ class User extends Authenticatable implements FilamentUser, HasAvatar, HasDefaul
         return $this->profile_photo_url;
     }
 
+    public function isAdmin(): bool
+    {
+        return $this->email === "test@example.com";
+    }
+
     /**
      * Get the attributes that should be cast.
      *

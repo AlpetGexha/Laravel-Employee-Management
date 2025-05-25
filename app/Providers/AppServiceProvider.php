@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Gate;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
@@ -24,6 +25,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->configureRateLimiting();
 
+        Gate::before(function ($user, $ability) {
+            return $user->isAdmin() ? true : null;
+        });
     }
 
     protected function configureRateLimiting(): void
