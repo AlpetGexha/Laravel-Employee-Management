@@ -113,8 +113,8 @@
               <img src="assets/images/team/shape-2.svg" alt="shape" class="shape shape-2" />
             </div>
             <div class="ud-team-info">
-              <h5>Çlirim Allaqi</h5>
-              <h6>Quality Assurance</h6>
+                <h5>Çlirim Allaqi</h5>
+                <h6>Quality Assurance</h6>
             </div>
             <ul class="ud-team-socials">
               <li>
